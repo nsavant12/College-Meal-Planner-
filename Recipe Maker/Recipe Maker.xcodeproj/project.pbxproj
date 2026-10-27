@@ -17,7 +17,17 @@
 		1B413E792C2755D90080ABAB /* Recipe_MakerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B413E782C2755D90080ABAB /* Recipe_MakerUITests.swift */; };
 		1B413E7B2C2755D90080ABAB /* Recipe_MakerUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B413E7A2C2755D90080ABAB /* Recipe_MakerUITestsLaunchTests.swift */; };
 		1B413ECE2C28C32F0080ABAB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B413ECD2C28C32F0080ABAB /* Extensions.swift */; };
-		1B413ED22C28C63C0080ABAB /* IngredientClassifier.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = 1B413ED12C28C63C0080ABAB /* IngredientClassifier.mlmodel */; };
+		A20000000000000000000001 /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000001 /* Ingredient.swift */; };
+		A20000000000000000000002 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000002 /* Recipe.swift */; };
+		A20000000000000000000003 /* RecipeCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000003 /* RecipeCatalog.swift */; };
+		A20000000000000000000004 /* PlannerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000004 /* PlannerStore.swift */; };
+		A20000000000000000000005 /* IngredientRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000005 /* IngredientRecognizer.swift */; };
+		A20000000000000000000006 /* PlannerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000006 /* PlannerModel.swift */; };
+		A20000000000000000000007 /* PhotoPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000007 /* PhotoPicker.swift */; };
+		A20000000000000000000008 /* MealPlannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000008 /* MealPlannerView.swift */; };
+		A20000000000000000000009 /* IngredientReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000009 /* IngredientReviewView.swift */; };
+		A2000000000000000000000A /* RecipeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000A /* RecipeViews.swift */; };
+		A2000000000000000000000B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000B /* PrivacyInfo.xcprivacy */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,7 +62,17 @@
 		1B413E782C2755D90080ABAB /* Recipe_MakerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe_MakerUITests.swift; sourceTree = "<group>"; };
 		1B413E7A2C2755D90080ABAB /* Recipe_MakerUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe_MakerUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		1B413ECD2C28C32F0080ABAB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		1B413ED12C28C63C0080ABAB /* IngredientClassifier.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; name = IngredientClassifier.mlmodel; path = ../../../Downloads/IngredientClassifier.mlmodel; sourceTree = "<group>"; };
+		A10000000000000000000001 /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core/Ingredient.swift"; sourceTree = "<group>"; };
+		A10000000000000000000002 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core/Recipe.swift"; sourceTree = "<group>"; };
+		A10000000000000000000003 /* RecipeCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core/RecipeCatalog.swift"; sourceTree = "<group>"; };
+		A10000000000000000000004 /* PlannerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core/PlannerStore.swift"; sourceTree = "<group>"; };
+		A10000000000000000000005 /* IngredientRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IngredientRecognizer.swift"; sourceTree = "<group>"; };
+		A10000000000000000000006 /* PlannerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PlannerModel.swift"; sourceTree = "<group>"; };
+		A10000000000000000000007 /* PhotoPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhotoPicker.swift"; sourceTree = "<group>"; };
+		A10000000000000000000008 /* MealPlannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MealPlannerView.swift"; sourceTree = "<group>"; };
+		A10000000000000000000009 /* IngredientReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IngredientReviewView.swift"; sourceTree = "<group>"; };
+		A1000000000000000000000A /* RecipeViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeViews.swift"; sourceTree = "<group>"; };
+		A1000000000000000000000B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,7 +123,17 @@
 		1B413E562C2755D50080ABAB /* Recipe Maker */ = {
 			isa = PBXGroup;
 			children = (
-				1B413ED12C28C63C0080ABAB /* IngredientClassifier.mlmodel */,
+				A10000000000000000000001 /* Ingredient.swift */,
+				A10000000000000000000002 /* Recipe.swift */,
+				A10000000000000000000003 /* RecipeCatalog.swift */,
+				A10000000000000000000004 /* PlannerStore.swift */,
+				A10000000000000000000005 /* IngredientRecognizer.swift */,
+				A10000000000000000000006 /* PlannerModel.swift */,
+				A10000000000000000000007 /* PhotoPicker.swift */,
+				A10000000000000000000008 /* MealPlannerView.swift */,
+				A10000000000000000000009 /* IngredientReviewView.swift */,
+				A1000000000000000000000A /* RecipeViews.swift */,
+				A1000000000000000000000B /* PrivacyInfo.xcprivacy */,
 				1B413ECD2C28C32F0080ABAB /* Extensions.swift */,
 				1B413E572C2755D50080ABAB /* AppDelegate.swift */,
 				1B413E592C2755D50080ABAB /* SceneDelegate.swift */,
@@ -237,6 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2000000000000000000000B /* PrivacyInfo.xcprivacy in Resources */,
 				1B413E612C2755D90080ABAB /* Assets.xcassets in Resources */,
 				1B413E642C2755D90080ABAB /* Base in Resources */,
 				1B413E5F2C2755D50080ABAB /* Base in Resources */,
@@ -264,11 +295,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A20000000000000000000001 /* Ingredient.swift in Sources */,
+				A20000000000000000000002 /* Recipe.swift in Sources */,
+				A20000000000000000000003 /* RecipeCatalog.swift in Sources */,
+				A20000000000000000000004 /* PlannerStore.swift in Sources */,
+				A20000000000000000000005 /* IngredientRecognizer.swift in Sources */,
+				A20000000000000000000006 /* PlannerModel.swift in Sources */,
+				A20000000000000000000007 /* PhotoPicker.swift in Sources */,
+				A20000000000000000000008 /* MealPlannerView.swift in Sources */,
+				A20000000000000000000009 /* IngredientReviewView.swift in Sources */,
+				A2000000000000000000000A /* RecipeViews.swift in Sources */,
 				1B413ECE2C28C32F0080ABAB /* Extensions.swift in Sources */,
 				1B413E5C2C2755D50080ABAB /* ViewController.swift in Sources */,
 				1B413E582C2755D50080ABAB /* AppDelegate.swift in Sources */,
 				1B413E5A2C2755D50080ABAB /* SceneDelegate.swift in Sources */,
-				1B413ED22C28C63C0080ABAB /* IngredientClassifier.mlmodel in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -450,9 +490,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 97D2U9K225;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Recipe Maker/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Meal Planner";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -478,9 +518,9 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 97D2U9K225;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Recipe Maker/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Meal Planner";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
