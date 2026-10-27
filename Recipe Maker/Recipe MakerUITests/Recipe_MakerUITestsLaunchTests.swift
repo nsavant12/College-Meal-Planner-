@@ -1,31 +1,18 @@
-//
-//  Recipe_MakerUITestsLaunchTests.swift
-//  Recipe MakerUITests
-//
-//  Created by Nikhil Savant on 6/22/24.
-//
-
 import XCTest
 
 final class Recipe_MakerUITestsLaunchTests: XCTestCase {
+    override class var runsForEachTargetApplicationUIConfiguration: Bool { true }
+    override func setUpWithError() throws { continueAfterFailure = false }
 
-    override class var runsForEachTargetApplicationUIConfiguration: Bool {
-        true
-    }
-
-    override func setUpWithError() throws {
-        continueAfterFailure = false
-    }
-
-    func testLaunch() throws {
+    func testLaunch() {
         let app = XCUIApplication()
+        app.launchArguments = ["--uitesting", "--reset-state"]
         app.launch()
-
-        // Insert steps here to perform after app launch but before taking a screenshot,
-        // such as logging into a test account or navigating somewhere in the app
-
+        XCTAssertTrue(app.buttons["takePhoto"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["choosePhoto"].exists)
+        XCTAssertTrue(app.tabBars.buttons["Pantry"].exists)
         let attachment = XCTAttachment(screenshot: app.screenshot())
-        attachment.name = "Launch Screen"
+        attachment.name = "Pantry launch"
         attachment.lifetime = .keepAlways
         add(attachment)
     }

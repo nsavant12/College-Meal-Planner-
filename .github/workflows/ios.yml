@@ -1,0 +1,39 @@
+name: iOS checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: macos-15
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test recipe and persistence logic
+        run: bash scripts/test-core.sh
+      - name: Select an available iPhone simulator
+        id: simulator
+        run: |
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json, subprocess
+          devices = json.loads(subprocess.check_output(["xcrun", "simctl", "list", "devices", "available", "-j"]))["devices"]
+          phones = [d for runtime, items in devices.items() if ".iOS-" in runtime for d in items if d["name"].startswith("iPhone")]
+          if not phones:
+              raise SystemExit("No iPhone simulator installed")
+          print("id=" + phones[0]["udid"])
+          PY
+      - name: Build app and run unit and UI tests
+        run: >-
+          xcodebuild test
+          -project "Recipe Maker/Recipe Maker.xcodeproj"
+          -scheme "Recipe Maker"
+          -destination 'platform=iOS Simulator,id=${{ steps.simulator.outputs.id }}'
+          -parallel-testing-enabled NO
+          -resultBundlePath TestResults.xcresult
+          CODE_SIGNING_ALLOWED=NO

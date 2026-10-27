@@ -1,41 +1,72 @@
-//
-//  Recipe_MakerUITests.swift
-//  Recipe MakerUITests
-//
-//  Created by Nikhil Savant on 6/22/24.
-//
-
 import XCTest
 
 final class Recipe_MakerUITests: XCTestCase {
+    override func setUpWithError() throws { continueAfterFailure = false }
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    private func launch() -> XCUIApplication {
         let app = XCUIApplication()
+        app.launchArguments = ["--uitesting", "--reset-state"]
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        return app
     }
 
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+    private func add(_ ingredients: String, to app: XCUIApplication) {
+        let input = app.textFields["ingredientInput"].exists
+            ? app.textFields["ingredientInput"] : app.textViews["ingredientInput"]
+        XCTAssertTrue(input.waitForExistence(timeout: 5))
+        input.tap()
+        input.typeText(ingredients)
+        app.buttons["addIngredients"].tap()
+    }
+
+    func testPantryToRecipeSaveAndRelaunch() {
+        let app = launch()
+        add("banana, oats, peanut butter", to: app)
+        app.swipeUp()
+        app.buttons["findRecipes"].tap()
+        let recipe = app.buttons["recipe-banana-peanut-oats"]
+        XCTAssertTrue(recipe.waitForExistence(timeout: 5))
+        recipe.tap()
+        app.buttons["saveRecipe"].tap()
+        XCTAssertEqual(app.buttons["saveRecipe"].label, "Unsave recipe")
+        app.terminate()
+        app.launchArguments = ["--uitesting"]
+        app.launch()
+        app.tabBars.buttons["Saved"].tap()
+        XCTAssertTrue(app.buttons["recipe-banana-peanut-oats"].waitForExistence(timeout: 5))
+        app.tabBars.buttons["Pantry"].tap()
+        app.swipeUp()
+        XCTAssertTrue(app.descendants(matching: .any)["pantry-banana"].exists)
+    }
+
+    func testEmptyReadyFilterAndReset() {
+        let app = launch()
+        app.tabBars.buttons["Recipes"].tap()
+        app.buttons["recipeFilters"].tap()
+        app.switches["readyOnlyFilter"].tap()
+        app.buttons["Done"].tap()
+        XCTAssertTrue(app.staticTexts["No recipes found"].waitForExistence(timeout: 5))
+        app.buttons["Reset filters"].tap()
+        XCTAssertTrue(app.buttons.matching(NSPredicate(format: "identifier BEGINSWITH 'recipe-'")).firstMatch.exists)
+    }
+
+    func testCookingChecklistAndUnsave() {
+        let app = launch()
+        add("banana, oats, peanut butter", to: app)
+        app.tabBars.buttons["Recipes"].tap()
+        app.buttons["recipe-banana-peanut-oats"].tap()
+        app.buttons["saveRecipe"].tap()
+        app.buttons["saveRecipe"].tap()
+        XCTAssertEqual(app.buttons["saveRecipe"].label, "Save recipe")
+        for index in 0..<3 {
+            let step = app.buttons["cookingStep-\(index)"]
+            for _ in 0..<5 where !step.isHittable { app.swipeUp() }
+            XCTAssertTrue(step.isHittable)
+            step.tap()
         }
+        app.swipeUp()
+        XCTAssertTrue(app.descendants(matching: .any)["cookingComplete"].exists)
+        app.buttons["Reset cooking checklist"].tap()
+        XCTAssertFalse(app.descendants(matching: .any)["cookingComplete"].exists)
     }
 }
