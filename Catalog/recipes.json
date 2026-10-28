@@ -1,0 +1,780 @@
+{
+  "catalogVersion" : 1,
+  "recipes" : [
+    {
+      "diet" : "vegan",
+      "equipment" : "Stove · pot · frying pan",
+      "id" : "tomato-spinach-pasta",
+      "ingredients" : [
+        {
+          "amount" : "85 g dry",
+          "name" : "pasta"
+        },
+        {
+          "amount" : "2 medium, chopped",
+          "name" : "tomato"
+        },
+        {
+          "amount" : "2 handfuls",
+          "name" : "spinach"
+        },
+        {
+          "amount" : "1 clove, minced",
+          "name" : "garlic"
+        },
+        {
+          "amount" : "1 tbsp",
+          "name" : "olive oil"
+        },
+        {
+          "amount" : "¼ tsp",
+          "name" : "salt"
+        }
+      ],
+      "minutes" : 20,
+      "servings" : 1,
+      "steps" : [
+        "Bring a pot of water to a boil. Add the pasta and cook for the time on its package. Save ¼ cup of cooking water before draining.",
+        "Warm the oil in a frying pan over medium heat. Add the garlic and stir for 30 seconds.",
+        "Add the tomatoes and salt. Cook for 6–8 minutes, stirring, until the tomatoes soften into a sauce.",
+        "Stir in the spinach until wilted. Add the pasta and a splash of the reserved water; toss until coated."
+      ],
+      "summary" : "A weeknight classic with a bright, garlicky sauce.",
+      "symbol" : "🍝",
+      "tip" : "Break up very soft tomatoes with the back of a spoon for a smoother sauce.",
+      "title" : "Tomato & spinach pasta"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Microwave · large microwave-safe bowl",
+      "id" : "banana-peanut-oats",
+      "ingredients" : [
+        {
+          "amount" : "½ cup rolled",
+          "name" : "oats"
+        },
+        {
+          "amount" : "1 medium",
+          "name" : "banana"
+        },
+        {
+          "amount" : "1 tbsp",
+          "name" : "peanut butter"
+        }
+      ],
+      "minutes" : 7,
+      "servings" : 1,
+      "steps" : [
+        "Combine the oats and 1 cup of water in a large microwave-safe bowl with room to bubble up.",
+        "Microwave on high for 2 minutes, stir, then cook in 30-second bursts until the oats are tender. Let stand for 1 minute.",
+        "Mash half the banana into the oats with the peanut butter. Slice the rest over the top."
+      ],
+      "summary" : "A warm, filling breakfast in one bowl.",
+      "symbol" : "🥣",
+      "tip" : "Microwave strength varies. Add a splash of water if the oats become too thick.",
+      "title" : "Banana peanut butter oats"
+    },
+    {
+      "diet" : "vegetarian",
+      "equipment" : "Bowl · knife",
+      "id" : "berry-yogurt-bowl",
+      "ingredients" : [
+        {
+          "amount" : "¾ cup plain",
+          "name" : "yogurt"
+        },
+        {
+          "amount" : "½ cup, sliced",
+          "name" : "strawberry"
+        },
+        {
+          "amount" : "2 tbsp rolled",
+          "name" : "oats"
+        },
+        {
+          "amount" : "1 tsp",
+          "name" : "honey"
+        }
+      ],
+      "minutes" : 5,
+      "servings" : 1,
+      "steps" : [
+        "Spoon the yogurt into a bowl.",
+        "Wash and slice the strawberries, removing the leafy tops.",
+        "Arrange the strawberries and oats over the yogurt and drizzle with honey."
+      ],
+      "summary" : "Fresh berries, creamy yogurt, and a little crunch.",
+      "symbol" : "🍓",
+      "tip" : "Let it sit for 5 minutes if you prefer the oats softer.",
+      "title" : "Berry crunch yogurt bowl"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Stove · small saucepan",
+      "id" : "apple-cinnamon-oats",
+      "ingredients" : [
+        {
+          "amount" : "1 small, diced",
+          "name" : "apple"
+        },
+        {
+          "amount" : "½ cup rolled",
+          "name" : "oats"
+        },
+        {
+          "amount" : "¼ tsp",
+          "name" : "cinnamon"
+        },
+        {
+          "amount" : "1 tsp",
+          "name" : "maple syrup"
+        }
+      ],
+      "minutes" : 10,
+      "servings" : 1,
+      "steps" : [
+        "Put the diced apple, cinnamon, and 2 tablespoons of water in a saucepan. Cover and cook over medium heat for 3 minutes.",
+        "Add the oats and 1 cup of water. Bring to a gentle simmer and stir for 4–5 minutes, until creamy.",
+        "Transfer to a bowl and drizzle with maple syrup."
+      ],
+      "summary" : "A cozy breakfast built from inexpensive staples.",
+      "symbol" : "🍎",
+      "tip" : "Small apple pieces cook faster; there is no need to peel them.",
+      "title" : "Apple cinnamon oats"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Toaster · bowl · knife",
+      "id" : "avocado-tomato-toast",
+      "ingredients" : [
+        {
+          "amount" : "2 slices, vegan",
+          "name" : "bread"
+        },
+        {
+          "amount" : "1 small",
+          "name" : "avocado"
+        },
+        {
+          "amount" : "1 small, sliced",
+          "name" : "tomato"
+        },
+        {
+          "amount" : "½, juiced",
+          "name" : "lemon"
+        },
+        {
+          "amount" : "1 pinch",
+          "name" : "salt"
+        }
+      ],
+      "minutes" : 8,
+      "servings" : 1,
+      "steps" : [
+        "Toast the bread to your liking.",
+        "Mash the avocado in a bowl with the lemon juice and salt.",
+        "Spread the avocado on the toast and top with tomato slices. Serve right away."
+      ],
+      "summary" : "Fresh, satisfying, and ready between classes.",
+      "symbol" : "🥑",
+      "tip" : "Use a ripe avocado that yields gently when pressed.",
+      "title" : "Avocado & tomato toast"
+    },
+    {
+      "diet" : "vegetarian",
+      "equipment" : "Stove · frying pan · toaster",
+      "id" : "spinach-egg-toast",
+      "ingredients" : [
+        {
+          "amount" : "2",
+          "name" : "egg"
+        },
+        {
+          "amount" : "1 handful",
+          "name" : "spinach"
+        },
+        {
+          "amount" : "2 slices",
+          "name" : "bread"
+        },
+        {
+          "amount" : "1 tsp",
+          "name" : "olive oil"
+        },
+        {
+          "amount" : "1 pinch",
+          "name" : "salt"
+        }
+      ],
+      "minutes" : 10,
+      "servings" : 1,
+      "steps" : [
+        "Toast the bread. Beat the eggs with the salt in a small bowl.",
+        "Heat the oil in a nonstick pan over medium-low heat. Add the spinach and stir until wilted, about 1 minute.",
+        "Add the eggs and gently stir for 2–3 minutes until set with no liquid egg remaining. Spoon onto the toast."
+      ],
+      "summary" : "A quick skillet breakfast that works for dinner, too.",
+      "symbol" : "🍳",
+      "tip" : "Gentle heat keeps scrambled eggs tender.",
+      "title" : "Spinach scramble on toast"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Bowl · knife · can opener",
+      "id" : "chickpea-cucumber-salad",
+      "ingredients" : [
+        {
+          "amount" : "¾ cup canned, drained and rinsed",
+          "name" : "chickpea"
+        },
+        {
+          "amount" : "½, diced",
+          "name" : "cucumber"
+        },
+        {
+          "amount" : "1 medium, diced",
+          "name" : "tomato"
+        },
+        {
+          "amount" : "½, juiced",
+          "name" : "lemon"
+        },
+        {
+          "amount" : "1 tbsp",
+          "name" : "olive oil"
+        },
+        {
+          "amount" : "1 pinch",
+          "name" : "salt"
+        }
+      ],
+      "minutes" : 10,
+      "servings" : 1,
+      "steps" : [
+        "Drain and rinse the chickpeas. Wash and dice the cucumber and tomato.",
+        "Whisk the lemon juice, olive oil, and salt in a bowl.",
+        "Add the chickpeas and vegetables. Toss well and serve."
+      ],
+      "summary" : "A colorful lunch with no stove required.",
+      "symbol" : "🥗",
+      "tip" : "Pat the vegetables dry to keep the dressing from becoming watery.",
+      "title" : "Crunchy chickpea salad"
+    },
+    {
+      "diet" : "vegetarian",
+      "equipment" : "Stove · frying pan · spatula",
+      "id" : "black-bean-quesadilla",
+      "ingredients" : [
+        {
+          "amount" : "1 large flour",
+          "name" : "tortilla"
+        },
+        {
+          "amount" : "½ cup canned, drained and rinsed",
+          "name" : "black bean"
+        },
+        {
+          "amount" : "⅓ cup shredded vegetarian cheddar",
+          "name" : "cheese"
+        },
+        {
+          "amount" : "1 small, diced",
+          "name" : "tomato"
+        }
+      ],
+      "minutes" : 12,
+      "servings" : 1,
+      "steps" : [
+        "Mash the beans lightly with a fork. Spread them over half the tortilla.",
+        "Scatter the cheese and tomato over the beans, then fold the tortilla closed.",
+        "Warm a dry nonstick pan over medium-low heat. Cook the folded tortilla for 3–4 minutes on each side, until golden and the cheese melts.",
+        "Let rest for 1 minute, then cut into wedges."
+      ],
+      "summary" : "Crisp outside, melty inside, and easy on the dishes.",
+      "symbol" : "🫓",
+      "tip" : "Moderate heat gives the filling time to warm before the tortilla browns.",
+      "title" : "Black bean quesadilla"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Stove · frying pan with lid",
+      "id" : "broccoli-rice-bowl",
+      "ingredients" : [
+        {
+          "amount" : "1½ cups small florets",
+          "name" : "broccoli"
+        },
+        {
+          "amount" : "1 cup, refrigerated or freshly cooked",
+          "name" : "cooked rice"
+        },
+        {
+          "amount" : "1 tbsp",
+          "name" : "soy sauce"
+        },
+        {
+          "amount" : "1 tsp",
+          "name" : "sesame oil"
+        },
+        {
+          "amount" : "1 clove, minced",
+          "name" : "garlic"
+        }
+      ],
+      "minutes" : 15,
+      "servings" : 1,
+      "steps" : [
+        "Put the broccoli and 3 tablespoons of water in a frying pan. Cover and steam over medium heat for 4–5 minutes until tender.",
+        "Remove the lid and let any remaining water evaporate. Add the sesame oil and garlic; stir for 30 seconds.",
+        "Add the cooked rice and soy sauce. Stir for 3–4 minutes until steaming hot throughout."
+      ],
+      "summary" : "A warm bowl with a simple savory dressing.",
+      "symbol" : "🥦",
+      "tip" : "The time assumes cooked rice. Cook dry rice according to its package first, if needed.",
+      "title" : "Broccoli sesame rice bowl"
+    },
+    {
+      "diet" : "vegetarian",
+      "equipment" : "Stove · large frying pan",
+      "id" : "carrot-egg-fried-rice",
+      "ingredients" : [
+        {
+          "amount" : "1 cup, refrigerated or freshly cooked",
+          "name" : "cooked rice"
+        },
+        {
+          "amount" : "1 medium, grated",
+          "name" : "carrot"
+        },
+        {
+          "amount" : "1",
+          "name" : "egg"
+        },
+        {
+          "amount" : "1, sliced",
+          "name" : "green onion"
+        },
+        {
+          "amount" : "1 tbsp",
+          "name" : "soy sauce"
+        },
+        {
+          "amount" : "2 tsp",
+          "name" : "olive oil"
+        }
+      ],
+      "minutes" : 15,
+      "servings" : 1,
+      "steps" : [
+        "Heat the oil in a frying pan over medium heat. Add the carrot and cook for 3 minutes.",
+        "Push the carrot to one side. Crack the egg into the other side and scramble until set.",
+        "Add the cooked rice, green onion, and soy sauce. Stir-fry for 3–4 minutes until the rice is steaming hot throughout."
+      ],
+      "summary" : "Turn leftover rice into a fast, satisfying meal.",
+      "symbol" : "🍚",
+      "tip" : "Break up clumps of cooked rice with a fork before adding it to the pan.",
+      "title" : "Carrot & egg fried rice"
+    },
+    {
+      "diet" : "vegetarian",
+      "equipment" : "Microwave · microwave-safe plate and bowl",
+      "id" : "loaded-microwave-potato",
+      "ingredients" : [
+        {
+          "amount" : "1 medium",
+          "name" : "potato"
+        },
+        {
+          "amount" : "½ cup canned, drained and rinsed",
+          "name" : "black bean"
+        },
+        {
+          "amount" : "¼ cup shredded vegetarian cheddar",
+          "name" : "cheese"
+        },
+        {
+          "amount" : "2 tbsp plain",
+          "name" : "yogurt"
+        }
+      ],
+      "minutes" : 15,
+      "servings" : 1,
+      "steps" : [
+        "Scrub the potato and pierce it several times with a fork. Place on a microwave-safe plate.",
+        "Microwave on high for 5 minutes. Turn carefully, then cook in 1-minute bursts until tender, about 2–4 minutes more. Rest for 2 minutes.",
+        "Warm the beans in a covered, vented microwave-safe bowl for 1–2 minutes, stirring halfway.",
+        "Split the potato carefully; hot steam will escape. Fluff the inside with a fork, then add the beans, cheese, and yogurt."
+      ],
+      "summary" : "Comfort food without turning on the oven.",
+      "symbol" : "🥔",
+      "tip" : "A smaller potato cooks more quickly. Check with a fork instead of relying only on the timer.",
+      "title" : "Loaded microwave potato"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Knife · cutting board",
+      "id" : "hummus-crunch-wrap",
+      "ingredients" : [
+        {
+          "amount" : "1 large, vegan",
+          "name" : "tortilla"
+        },
+        {
+          "amount" : "3 tbsp",
+          "name" : "hummus"
+        },
+        {
+          "amount" : "1 small, grated",
+          "name" : "carrot"
+        },
+        {
+          "amount" : "¼, thinly sliced",
+          "name" : "cucumber"
+        },
+        {
+          "amount" : "1 handful",
+          "name" : "spinach"
+        }
+      ],
+      "minutes" : 8,
+      "servings" : 1,
+      "steps" : [
+        "Spread the hummus down the center of the tortilla, leaving a border around the edges.",
+        "Layer the spinach, grated carrot, and cucumber over the hummus.",
+        "Fold the sides inward, then roll tightly from the bottom. Cut in half to serve."
+      ],
+      "summary" : "A fresh lunch you can assemble in minutes.",
+      "symbol" : "🌯",
+      "tip" : "Avoid overfilling the wrap so it stays together.",
+      "title" : "Hummus crunch wrap"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Stove · saucepan · can opener",
+      "id" : "chickpea-spinach-curry",
+      "ingredients" : [
+        {
+          "amount" : "1 can (15 oz), drained and rinsed",
+          "name" : "chickpea"
+        },
+        {
+          "amount" : "3 handfuls",
+          "name" : "spinach"
+        },
+        {
+          "amount" : "1 can (14 oz), chopped",
+          "name" : "canned tomato"
+        },
+        {
+          "amount" : "½ cup",
+          "name" : "coconut milk"
+        },
+        {
+          "amount" : "½, diced",
+          "name" : "onion"
+        },
+        {
+          "amount" : "2 tsp",
+          "name" : "curry powder"
+        },
+        {
+          "amount" : "1 tbsp",
+          "name" : "olive oil"
+        },
+        {
+          "amount" : "¼ tsp",
+          "name" : "salt"
+        }
+      ],
+      "minutes" : 25,
+      "servings" : 2,
+      "steps" : [
+        "Heat the oil in a saucepan over medium heat. Add the onion and cook for 5 minutes, stirring, until softened.",
+        "Stir in the curry powder for 30 seconds. Add the canned tomatoes, chickpeas, coconut milk, and salt.",
+        "Bring to a gentle simmer and cook uncovered for 12 minutes, stirring occasionally.",
+        "Stir in the spinach and cook for 2 minutes until wilted. Divide between two bowls."
+      ],
+      "summary" : "A one-pan dinner with a creamy tomato sauce.",
+      "symbol" : "🍛",
+      "tip" : "This is a complete stew on its own; any bread or rice served alongside is extra.",
+      "title" : "Chickpea & spinach curry"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Microwave · microwave-safe plate and bowl",
+      "id" : "sweet-potato-bean-bowl",
+      "ingredients" : [
+        {
+          "amount" : "1 medium",
+          "name" : "sweet potato"
+        },
+        {
+          "amount" : "½ cup canned, drained and rinsed",
+          "name" : "black bean"
+        },
+        {
+          "amount" : "½",
+          "name" : "avocado"
+        },
+        {
+          "amount" : "½, juiced",
+          "name" : "lime"
+        },
+        {
+          "amount" : "1 pinch",
+          "name" : "salt"
+        }
+      ],
+      "minutes" : 20,
+      "servings" : 1,
+      "steps" : [
+        "Scrub and pierce the sweet potato with a fork. Microwave on a microwave-safe plate for 5 minutes, then turn and cook in 1-minute bursts until soft, about 3–5 minutes more.",
+        "Rest for 2 minutes. Meanwhile, heat the beans in a covered, vented microwave-safe bowl for 1–2 minutes, stirring halfway.",
+        "Carefully split the sweet potato and scoop the flesh into a bowl. Add the hot beans and diced avocado.",
+        "Finish with the lime juice and salt."
+      ],
+      "summary" : "Sweet, tangy, and hearty enough for dinner.",
+      "symbol" : "🍠",
+      "tip" : "Keep the skin if you enjoy its texture; scrub it well before cooking.",
+      "title" : "Sweet potato & bean bowl"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Stove · pot · frying pan",
+      "id" : "mushroom-garlic-pasta",
+      "ingredients" : [
+        {
+          "amount" : "85 g dry, egg-free",
+          "name" : "pasta"
+        },
+        {
+          "amount" : "150 g, sliced",
+          "name" : "mushroom"
+        },
+        {
+          "amount" : "2 cloves, minced",
+          "name" : "garlic"
+        },
+        {
+          "amount" : "1 tbsp",
+          "name" : "olive oil"
+        },
+        {
+          "amount" : "¼ tsp",
+          "name" : "salt"
+        },
+        {
+          "amount" : "1 pinch",
+          "name" : "black pepper"
+        }
+      ],
+      "minutes" : 20,
+      "servings" : 1,
+      "steps" : [
+        "Cook the pasta in boiling water according to its package. Save ¼ cup of pasta water before draining.",
+        "Heat the oil in a frying pan over medium-high heat. Add the mushrooms in a single layer and cook for 5–7 minutes, stirring occasionally, until golden.",
+        "Lower the heat, add the garlic, salt, and pepper, and stir for 30 seconds.",
+        "Toss in the pasta and enough reserved water to lightly coat it."
+      ],
+      "summary" : "Golden mushrooms make a simple pasta feel special.",
+      "symbol" : "🍄",
+      "tip" : "Let the mushrooms brown before stirring; overcrowding the pan makes them steam.",
+      "title" : "Garlic mushroom pasta"
+    },
+    {
+      "diet" : "any",
+      "equipment" : "Bowl · knife · can opener",
+      "id" : "tuna-cucumber-sandwich",
+      "ingredients" : [
+        {
+          "amount" : "1 small can (5 oz), drained",
+          "name" : "tuna"
+        },
+        {
+          "amount" : "2 slices",
+          "name" : "bread"
+        },
+        {
+          "amount" : "2 tbsp plain",
+          "name" : "yogurt"
+        },
+        {
+          "amount" : "¼, thinly sliced",
+          "name" : "cucumber"
+        },
+        {
+          "amount" : "½, juiced",
+          "name" : "lemon"
+        },
+        {
+          "amount" : "1 pinch",
+          "name" : "black pepper"
+        }
+      ],
+      "minutes" : 8,
+      "servings" : 1,
+      "steps" : [
+        "Drain the tuna and break it up in a bowl with a fork.",
+        "Mix in the yogurt, lemon juice, and black pepper.",
+        "Spread onto one slice of bread, add the cucumber slices, and top with the other slice."
+      ],
+      "summary" : "A crisp, creamy lunch from a cupboard staple.",
+      "symbol" : "🥪",
+      "tip" : "Drain the tuna thoroughly to keep the bread from becoming soggy.",
+      "title" : "Tuna cucumber sandwich"
+    },
+    {
+      "diet" : "vegan",
+      "equipment" : "Stove · frying pan",
+      "id" : "zucchini-chickpea-skillet",
+      "ingredients" : [
+        {
+          "amount" : "1 medium, diced",
+          "name" : "zucchini"
+        },
+        {
+          "amount" : "¾ cup canned, drained and rinsed",
+          "name" : "chickpea"
+        },
+        {
+          "amount" : "1 medium, chopped",
+          "name" : "tomato"
+        },
+        {
+          "amount" : "1 clove, minced",
+          "name" : "garlic"
+        },
+        {
+          "amount" : "1 tbsp",
+          "name" : "olive oil"
+        },
+        {
+          "amount" : "¼ tsp",
+          "name" : "salt"
+        }
+      ],
+      "minutes" : 20,
+      "servings" : 1,
+      "steps" : [
+        "Heat the oil in a frying pan over medium-high heat. Add the zucchini and cook for 5 minutes, stirring occasionally.",
+        "Add the garlic and stir for 30 seconds. Add the tomato, chickpeas, and salt.",
+        "Reduce to medium heat and cook for 8 minutes, stirring occasionally, until the zucchini is tender and the chickpeas are hot."
+      ],
+      "summary" : "A bright one-pan meal with very little cleanup.",
+      "symbol" : "🥒",
+      "tip" : "Cut the zucchini into even pieces so it cooks at the same rate.",
+      "title" : "Zucchini chickpea skillet"
+    },
+    {
+      "diet" : "vegetarian",
+      "equipment" : "Stove · nonstick pan · bowl",
+      "id" : "banana-oat-pancakes",
+      "ingredients" : [
+        {
+          "amount" : "1 ripe",
+          "name" : "banana"
+        },
+        {
+          "amount" : "1",
+          "name" : "egg"
+        },
+        {
+          "amount" : "¼ cup rolled",
+          "name" : "oats"
+        },
+        {
+          "amount" : "1 tsp",
+          "name" : "olive oil"
+        }
+      ],
+      "minutes" : 15,
+      "servings" : 1,
+      "steps" : [
+        "Mash the banana until smooth. Beat in the egg, then stir in the oats. Rest for 3 minutes.",
+        "Heat the oil in a nonstick pan over medium-low heat. Add the batter in small, 2-tablespoon portions.",
+        "Cook for 2–3 minutes on each side, flipping carefully, until golden and set through the center. Repeat with the remaining batter."
+      ],
+      "summary" : "Small, tender pancakes with four everyday ingredients.",
+      "symbol" : "🥞",
+      "tip" : "Keep these pancakes small; without flour, they are more delicate than regular pancakes.",
+      "title" : "Banana oat pancakes"
+    },
+    {
+      "diet" : "vegetarian",
+      "equipment" : "Stove · small frying pan with lid",
+      "id" : "tomato-egg-skillet",
+      "ingredients" : [
+        {
+          "amount" : "2",
+          "name" : "egg"
+        },
+        {
+          "amount" : "2 medium, chopped",
+          "name" : "tomato"
+        },
+        {
+          "amount" : "½, diced",
+          "name" : "bell pepper"
+        },
+        {
+          "amount" : "¼, diced",
+          "name" : "onion"
+        },
+        {
+          "amount" : "1 tbsp",
+          "name" : "olive oil"
+        },
+        {
+          "amount" : "¼ tsp",
+          "name" : "salt"
+        }
+      ],
+      "minutes" : 25,
+      "servings" : 1,
+      "steps" : [
+        "Heat the oil in a small frying pan over medium heat. Cook the onion and bell pepper for 5 minutes, stirring.",
+        "Add the tomatoes and salt. Simmer for 8 minutes, stirring and gently crushing the tomatoes, until saucy.",
+        "Make two small wells in the sauce and crack an egg into each. Cover and cook over low heat for 5–7 minutes until the whites and yolks are set."
+      ],
+      "summary" : "Eggs nestled in a warm, colorful vegetable sauce.",
+      "symbol" : "🍅",
+      "tip" : "Add a tablespoon of water if the sauce dries out before the eggs are cooked.",
+      "title" : "Tomato & pepper eggs"
+    },
+    {
+      "diet" : "vegetarian",
+      "equipment" : "Microwave · microwave-safe plate and bowl",
+      "id" : "broccoli-cheddar-potato",
+      "ingredients" : [
+        {
+          "amount" : "1 medium",
+          "name" : "potato"
+        },
+        {
+          "amount" : "1 cup small florets",
+          "name" : "broccoli"
+        },
+        {
+          "amount" : "⅓ cup shredded vegetarian cheddar",
+          "name" : "cheese"
+        },
+        {
+          "amount" : "1 pinch",
+          "name" : "salt"
+        }
+      ],
+      "minutes" : 18,
+      "servings" : 1,
+      "steps" : [
+        "Scrub and pierce the potato. Microwave on a microwave-safe plate for 5 minutes, turn, and continue in 1-minute bursts until tender, about 2–4 minutes more. Rest for 2 minutes.",
+        "Place the broccoli and 2 tablespoons of water in a microwave-safe bowl. Cover loosely and microwave for 2–3 minutes until tender. Carefully drain.",
+        "Split the potato carefully and fluff its center with a fork. Add the broccoli, salt, and cheese.",
+        "Microwave for 30–60 seconds until the cheese melts."
+      ],
+      "summary" : "A comforting microwave meal with a generous helping of greens.",
+      "symbol" : "🧀",
+      "tip" : "Handle hot dishes with oven mitts and open covers away from your face.",
+      "title" : "Broccoli cheddar potato"
+    }
+  ]
+}

@@ -7,3 +7,5 @@ xcuserdata/
 *.xcuserstate
 *.ipa
 *.dSYM/
+__pycache__/
+*.xcarchive/
