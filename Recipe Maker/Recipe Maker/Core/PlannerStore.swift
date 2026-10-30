@@ -41,4 +41,17 @@ struct PlannerStore {
         let backup = url.deletingLastPathComponent().appendingPathComponent("pantry-backup-\(UUID().uuidString).json")
         try FileManager.default.moveItem(at: url, to: backup)
     }
+
+    /// Delete only this store's state and recovery backups, leaving unrelated files alone.
+    func deleteAllData() throws {
+        let directory = url.deletingLastPathComponent()
+        guard FileManager.default.fileExists(atPath: directory.path) else { return }
+        let files = try FileManager.default.contentsOfDirectory(at: directory, includingPropertiesForKeys: nil)
+        for file in files where file.lastPathComponent.hasPrefix("pantry-backup-") && file.pathExtension == "json" {
+            try FileManager.default.removeItem(at: file)
+        }
+        if FileManager.default.fileExists(atPath: url.path) {
+            try FileManager.default.removeItem(at: url)
+        }
+    }
 }

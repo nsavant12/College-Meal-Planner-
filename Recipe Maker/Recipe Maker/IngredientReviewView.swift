@@ -18,7 +18,8 @@ struct IngredientReviewView: View {
     init(review: PhotoReview, add: @escaping ([String]) -> Void) {
         self.review = review
         self.add = add
-        _selected = State(initialValue: Set(review.result.candidates.prefix(1).map(\.name)))
+        // Each suggestion must be confirmed, including the highest-scored one.
+        _selected = State(initialValue: [])
     }
 
     private var additions: [String] { Array(selected.union(Ingredient.parse(manual))).sorted() }
@@ -32,49 +33,48 @@ struct IngredientReviewView: View {
             List {
                 Section {
                     Image(uiImage: review.image).resizable().scaledToFit()
-                        .frame(maxWidth: .infinity, maxHeight: 220).clipShape(RoundedRectangle(cornerRadius: 16))
+                        .frame(maxWidth: .infinity, maxHeight: 220)
+                        .clipShape(RoundedRectangle(cornerRadius: 22))
                         .accessibilityLabel("Selected ingredient photo")
-                        .listRowBackground(Color.clear)
+                        .listRowBackground(Color.clear).listRowInsets(EdgeInsets())
                 }
                 if review.result.candidates.isEmpty {
-                    Section {
-                        Label("Let's name this one", systemImage: "pencil.line").font(.headline)
-                        Text(review.message ?? "We couldn't confidently identify an ingredient. Enter its name below, or try another photo in better light.")
-                            .foregroundStyle(.secondary)
-                    }
+                    Text(review.message ?? "Name the ingredient below.")
+                        .font(.subheadline).foregroundStyle(MealTheme.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .listRowBackground(Color.clear)
                 } else {
-                    Section {
+                    Section("Select what you see") {
                         ForEach(review.result.candidates) { candidate in
                             Button {
                                 if selected.contains(candidate.name) { selected.remove(candidate.name) }
                                 else { selected.insert(candidate.name) }
                             } label: {
                                 HStack(spacing: 12) {
-                                    Image(systemName: selected.contains(candidate.name) ? "checkmark.circle.fill" : "circle")
-                                        .foregroundStyle(Color.accentColor).font(.title2)
-                                    Text(candidate.name.capitalized).foregroundStyle(.primary)
+                                    Text(candidate.name.capitalized).foregroundStyle(MealTheme.ink)
                                     Spacer()
-                                    Text("\(Int(candidate.confidence * 100))%")
-                                        .font(.caption.monospacedDigit()).foregroundStyle(.secondary)
-                                }.frame(minHeight: 44)
-                            }.buttonStyle(.plain)
-                                .accessibilityLabel("\(candidate.name), confidence score \(Int(candidate.confidence * 100)) percent")
+                                    Image(systemName: selected.contains(candidate.name) ? "checkmark.circle.fill" : "circle")
+                                        .foregroundStyle(MealTheme.accent).font(.title2)
+                                }.frame(minHeight: 44).contentShape(Rectangle())
+                            }.buttonStyle(.plain).listRowBackground(MealTheme.surface)
+                                .accessibilityLabel("Suggested ingredient, \(candidate.name)")
+                                .accessibilityIdentifier("candidate-\(candidate.name)")
                                 .accessibilityValue(selected.contains(candidate.name) ? "Selected" : "Not selected")
                         }
-                    } header: { Text("Does this look right?") }
-                    footer: {
-                        Text("These are possible labels, not a count of objects. Select only what you see. Confidence scores from \(review.result.source) aren't a guarantee.")
                     }
                 }
                 Section {
-                    TextField("Ingredient names, separated by commas", text: $manual, axis: .vertical)
-                        .textInputAutocapitalization(.never).lineLimit(1...3)
+                    TextField("Ingredient names", text: $manual,
+                              prompt: Text("Add or correct a name").foregroundColor(MealTheme.secondary), axis: .vertical)
+                        .textInputAutocapitalization(.never).lineLimit(1...3).frame(minHeight: 44)
                         .accessibilityIdentifier("reviewIngredientInput")
-                    if hasLongName { Text("Keep each ingredient name under 61 characters.").font(.caption).foregroundStyle(.red) }
-                } header: { Text("Add or correct a name") }
-                footer: { Text("Only confirmed names are saved. The photo is discarded when you leave this screen.") }
-            }
-            .navigationTitle("Review ingredients").navigationBarTitleDisplayMode(.inline)
+                        .listRowBackground(MealTheme.surface)
+                    if hasLongName { Text("60 characters per name, max.").font(.caption).foregroundStyle(.red) }
+                } footer: { Text("Separate names with commas.") }
+                Label("Photos stay on your device", systemImage: "lock")
+                    .font(.caption).foregroundStyle(MealTheme.secondary).listRowBackground(Color.clear)
+            }.listStyle(.insetGrouped).mealSurface()
+            .navigationTitle("Confirm ingredients").navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {

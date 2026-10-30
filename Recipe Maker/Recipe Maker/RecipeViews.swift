@@ -21,41 +21,47 @@ struct RecipeListView: View {
     var body: some View {
         List {
             Section {
-                VStack(alignment: .leading, spacing: 8) {
-                    Text(savedOnly ? "The keepers." : "What sounds good?")
-                        .font(.system(.largeTitle, design: .rounded, weight: .bold))
-                    Text(subtitle).font(.subheadline).foregroundStyle(.secondary)
-                    if !savedOnly && filtered {
-                        Text(filterSummary).font(.caption.weight(.medium)).foregroundStyle(Color.accentColor)
-                    }
-                }.padding(.vertical, 8).listRowBackground(Color.clear)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 12, trailing: 0))
+                HStack(alignment: .firstTextBaseline) {
+                    Text(savedOnly ? "Your collection" : "On the menu")
+                        .font(.system(.title, design: .serif, weight: .semibold))
+                    Spacer()
+                    MealBadge(title: "\(matches.count)")
+                }.padding(.vertical, 4).listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(top: 4, leading: 0, bottom: 8, trailing: 0))
+                if !savedOnly && filtered {
+                    Text(filterSummary).font(.caption.weight(.medium)).foregroundStyle(MealTheme.accent)
+                        .listRowBackground(Color.clear).listRowInsets(EdgeInsets())
+                }
             }
-            if matches.isEmpty {
+            if let message = model.catalogMessage {
                 ContentUnavailableView {
-                    Label(savedOnly && model.state.favorites.isEmpty ? "Your favorites live here" : "No recipes found",
-                          systemImage: savedOnly ? "heart" : "magnifyingglass")
+                    Label("Recipe library unavailable", systemImage: "books.vertical")
                 } description: {
-                    Text(savedOnly && model.state.favorites.isEmpty
-                         ? "Open any recipe and tap the heart to save it for another day."
-                         : "Try another search or loosen your filters to see more ideas.")
+                    Text(message)
                 } actions: {
-                    if !query.isEmpty { Button("Clear search") { query = "" } }
-                    if !savedOnly && filtered { Button("Reset filters") { resetFilters() } }
+                    Button("Try again") { model.reloadCatalog() }
                 }.listRowBackground(Color.clear)
+            } else if matches.isEmpty {
+                VStack(spacing: 16) {
+                    MealEmptyState(title: savedOnly && model.state.favorites.isEmpty ? "No favorites yet" : "No matches",
+                                   message: savedOnly && model.state.favorites.isEmpty ? "Tap a heart to save a recipe." : "Try another search or reset your filters.",
+                                   symbol: savedOnly ? "heart" : "magnifyingglass",
+                                   identifier: savedOnly ? "emptySaved" : "emptyRecipeResults")
+                    if !query.isEmpty { Button("Clear search") { query = "" }.buttonStyle(MealActionStyle(prominent: false)) }
+                    if !savedOnly && filtered { Button("Reset filters") { resetFilters() }.buttonStyle(MealActionStyle(prominent: false)) }
+                }.mealCard().listRowBackground(Color.clear).listRowInsets(EdgeInsets()).listRowSeparator(.hidden)
             } else {
                 Section {
                     ForEach(matches) { match in
                         NavigationLink(value: match.recipe.id) {
                             RecipeRow(match: match, saved: model.state.favorites.contains(match.id))
                         }.accessibilityIdentifier("recipe-\(match.id)")
+                            .listRowBackground(MealTheme.surface).listRowSeparator(.hidden)
                     }
-                } header: {
-                    Text("\(matches.count) \(matches.count == 1 ? "recipe" : "recipes") · \(savedOnly ? "your collection" : "closest pantry matches first")")
                 }
             }
         }
-        .listStyle(.insetGrouped)
+        .listStyle(.insetGrouped).listRowSpacing(8).mealSurface()
         .navigationTitle(savedOnly ? "Saved recipes" : "Recipes").navigationBarTitleDisplayMode(.inline)
         .searchable(text: $query, placement: .navigationBarDrawer(displayMode: .always), prompt: "Recipe or ingredient")
         .navigationDestination(for: String.self) { id in
@@ -71,12 +77,6 @@ struct RecipeListView: View {
             }
         }
         .sheet(isPresented: $showFilters) { RecipeFiltersView(model: model) }
-    }
-
-    private var subtitle: String {
-        if savedOnly { return "A little collection of meals you'll want to make again." }
-        if model.state.pantry.isEmpty { return "Explore simple meals, or add pantry ingredients to find your closest matches." }
-        return "Simple meals, sorted around the ingredients you already have."
     }
 
     private var filterSummary: String {
@@ -98,24 +98,27 @@ struct RecipeListView: View {
 private struct RecipeRow: View {
     let match: RecipeMatch
     let saved: Bool
-    @ScaledMetric(relativeTo: .title) private var symbolSize: CGFloat = 38
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     var body: some View {
-        HStack(alignment: .top, spacing: 14) {
-            Text(match.recipe.symbol).font(.system(size: symbolSize))
-                .padding(10).background(Color.accentColor.opacity(0.08), in: RoundedRectangle(cornerRadius: 16))
-                .accessibilityHidden(true)
-            VStack(alignment: .leading, spacing: 7) {
-                Text(match.recipe.title).font(.headline).foregroundStyle(.primary)
-                Text(match.recipe.summary).font(.subheadline).foregroundStyle(.secondary).lineLimit(3)
-                Text("\(match.recipe.minutes) min · \(match.recipe.servings) \(match.recipe.servings == 1 ? "serving" : "servings")")
-                    .font(.caption).foregroundStyle(.secondary)
-                Label(match.isReady ? "All ingredients on hand" : "\(match.available.count) of \(match.recipe.ingredients.count) ingredients on hand",
-                      systemImage: match.isReady ? "checkmark.circle.fill" : "basket")
-                    .font(.caption.weight(.medium)).foregroundStyle(match.isReady ? Color.accentColor : .secondary)
-                if saved { Label("Saved", systemImage: "heart.fill").font(.caption).foregroundStyle(Color.accentColor) }
+        HStack(alignment: .center, spacing: 16) {
+            if !dynamicTypeSize.isAccessibilitySize {
+                Text(match.recipe.symbol).font(.system(size: 36))
+                    .frame(width: 68, height: 80)
+                    .background(match.isReady ? MealTheme.soft : MealTheme.gold, in: RoundedRectangle(cornerRadius: 20))
+                    .accessibilityHidden(true)
             }
-        }.padding(.vertical, 10).accessibilityElement(children: .combine)
+            VStack(alignment: .leading, spacing: 8) {
+                Text(match.recipe.title).font(.system(.headline, design: .serif, weight: .semibold))
+                    .foregroundStyle(MealTheme.ink).fixedSize(horizontal: false, vertical: true)
+                HStack(spacing: 10) {
+                    Label("\(match.recipe.minutes) min", systemImage: "clock")
+                    if saved { Image(systemName: "heart.fill").accessibilityLabel("Saved") }
+                }.font(.caption).foregroundStyle(MealTheme.secondary)
+                Text(match.isReady ? "Ready to cook" : "\(match.missing.count) missing")
+                    .font(.caption.weight(.semibold)).foregroundStyle(match.isReady ? MealTheme.accent : MealTheme.secondary)
+            }
+        }.padding(.vertical, 8).accessibilityElement(children: .combine)
     }
 }
 
@@ -134,7 +137,7 @@ struct RecipeFiltersView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Make it yours") {
+                Section("Preferences") {
                     Picker("Diet", selection: preference(\.diet)) {
                         ForEach(Diet.allCases) { diet in Text(diet.title).tag(diet) }
                     }.accessibilityIdentifier("dietFilter")
@@ -151,11 +154,12 @@ struct RecipeFiltersView: View {
                     Toggle("I have pantry staples", isOn: preference(\.assumeStaples))
                         .accessibilityIdentifier("staplesFilter")
                 } header: { Text("Pantry staples") }
-                footer: { Text("Count olive oil, salt, and black pepper as available. Everything else must be in your pantry. Check amounts before cooking.") }
+                footer: { Text("Count oil, salt, and pepper as available.") }
                 Section {
                     Button("Reset all filters") { model.updatePreferences(RecipePreferences()) }
-                } footer: { Text("Filters are saved on this device. Your Saved tab always shows your full collection. Dietary labels depend on using the ingredient types specified in each recipe.") }
+                }
             }
+            .mealSurface()
             .navigationTitle("Filters").navigationBarTitleDisplayMode(.inline)
             .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
         }
@@ -166,6 +170,7 @@ struct RecipeDetailView: View {
     @ObservedObject var model: PlannerModel
     let recipe: Recipe
     @State private var completedSteps: Set<Int> = []
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
 
     private var match: RecipeMatch { model.match(recipe) }
     private var isSaved: Bool { model.state.favorites.contains(recipe.id) }
@@ -174,32 +179,37 @@ struct RecipeDetailView: View {
         List {
             Section {
                 VStack(alignment: .leading, spacing: 16) {
-                    Text(recipe.symbol).font(.system(size: 64)).accessibilityHidden(true)
-                    Text(recipe.title).font(.system(.largeTitle, design: .rounded, weight: .bold))
-                        .accessibilityAddTraits(.isHeader)
-                    Text(recipe.summary).foregroundStyle(.secondary)
-                    ViewThatFits(in: .horizontal) {
-                        HStack(spacing: 16) { metadata }
+                    HStack(alignment: .top, spacing: 16) {
+                        if !dynamicTypeSize.isAccessibilitySize {
+                            Text(recipe.symbol).font(.system(size: 48))
+                                .frame(width: 76, height: 88)
+                                .background(MealTheme.gold, in: RoundedRectangle(cornerRadius: 22))
+                                .accessibilityHidden(true)
+                        }
+                        Text(recipe.title).font(.system(.title, design: .serif, weight: .semibold))
+                            .fixedSize(horizontal: false, vertical: true).accessibilityAddTraits(.isHeader)
+                    }
+                    Text(recipe.summary).font(.subheadline).foregroundStyle(MealTheme.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                    if dynamicTypeSize.isAccessibilitySize {
                         VStack(alignment: .leading, spacing: 8) { metadata }
-                    }.font(.subheadline.weight(.medium)).foregroundStyle(Color.accentColor)
-                    Label(recipe.equipment, systemImage: "frying.pan").font(.subheadline).foregroundStyle(.secondary)
-                }.padding(.vertical, 12).listRowBackground(Color.clear)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 8, trailing: 0))
+                    } else { HStack(spacing: 14) { metadata } }
+                    Label(recipe.equipment, systemImage: "frying.pan").font(.caption).foregroundStyle(MealTheme.secondary)
+                }.mealCard().listRowBackground(Color.clear).listRowInsets(EdgeInsets())
             }
             Section {
                 ForEach(recipe.ingredients) { ingredient in
-                    ingredientRow(ingredient)
+                    ingredientRow(ingredient).listRowBackground(MealTheme.surface)
                 }
-            } header: { Text("Ingredients · \(recipe.servings) \(recipe.servings == 1 ? "serving" : "servings")") }
-            footer: { Text("Pantry checks names, not quantities. Make sure you have enough of each ingredient.") }
+            } header: { Text("Ingredients") }
+            footer: { Text("Check quantities before cooking.") }
 
             if !match.missing.isEmpty {
                 Section {
                     ShareLink(item: shoppingText) {
-                        Label("Share missing ingredients (\(match.missing.count))", systemImage: "square.and.arrow.up")
+                        Label("Shopping list · \(match.missing.count) missing", systemImage: "square.and.arrow.up")
                     }.accessibilityIdentifier("shareShoppingList")
-                } header: { Text("A quick shopping list") }
-                footer: { Text("Send the ingredients you're missing to Notes, Messages, or someone shopping with you.") }
+                }.listRowBackground(MealTheme.soft)
             }
 
             Section {
@@ -210,36 +220,39 @@ struct RecipeDetailView: View {
                     } label: {
                         HStack(alignment: .top, spacing: 14) {
                             Image(systemName: completedSteps.contains(index) ? "checkmark.circle.fill" : "circle")
-                                .font(.title2).foregroundStyle(Color.accentColor).padding(.top, 2)
+                                .font(.title2).foregroundStyle(MealTheme.accent).padding(.top, 2)
                             VStack(alignment: .leading, spacing: 6) {
-                                Text("STEP \(index + 1)").font(.caption.weight(.bold)).tracking(1)
-                                    .foregroundStyle(Color.accentColor)
+                                Text("Step \(index + 1)").font(.caption.weight(.semibold))
+                                    .foregroundStyle(MealTheme.accent)
                                 Text(step).foregroundStyle(completedSteps.contains(index) ? .secondary : .primary)
                                     .fixedSize(horizontal: false, vertical: true)
                             }
                         }.padding(.vertical, 10)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .contentShape(Rectangle())
                     }.buttonStyle(.plain)
                         .accessibilityLabel("Step \(index + 1). \(step)")
                         .accessibilityValue(completedSteps.contains(index) ? "Completed" : "Not completed")
                         .accessibilityHint("Double tap to toggle completion")
-                        .accessibilityIdentifier("cookingStep-\(index)")
+                        .accessibilityIdentifier("cookingStep-\(index)").listRowBackground(MealTheme.surface)
                 }
                 if completedSteps.count == recipe.steps.count {
-                    Label("Nice work. Enjoy your meal!", systemImage: "checkmark.seal.fill")
-                        .font(.headline).foregroundStyle(Color.accentColor)
+                    Label("Enjoy your meal!", systemImage: "checkmark.seal.fill")
+                        .font(.headline).foregroundStyle(MealTheme.accent)
                         .accessibilityIdentifier("cookingComplete")
                 }
                 if !completedSteps.isEmpty {
                     Button("Reset cooking checklist") { completedSteps.removeAll() }
                 }
             } header: { Text("Let's cook · \(completedSteps.count)/\(recipe.steps.count)") }
-            footer: { Text("Tap a step as you finish it. The checklist resets when you leave this recipe.") }
+            footer: { Text("Tap to check off each step.") }
             Section {
-                Label { Text(recipe.tip) } icon: { Image(systemName: "lightbulb") }
-                    .font(.subheadline).padding(.vertical, 6)
-            } header: { Text("One little tip") }
+                DisclosureGroup("Kitchen tip") {
+                    Text(recipe.tip).font(.subheadline).foregroundStyle(MealTheme.secondary)
+                }.listRowBackground(MealTheme.surface)
+            }
         }
-        .listStyle(.insetGrouped)
+        .listStyle(.insetGrouped).listRowSpacing(8).mealSurface()
         .navigationTitle("Let's cook").navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
@@ -255,9 +268,9 @@ struct RecipeDetailView: View {
     }
 
     @ViewBuilder private var metadata: some View {
-        Label("\(recipe.minutes) min", systemImage: "clock")
-        Label("\(recipe.servings) \(recipe.servings == 1 ? "serving" : "servings")", systemImage: "person")
-        if recipe.diet != .any { Label(recipe.diet.title, systemImage: "leaf") }
+        Label("\(recipe.minutes) min", systemImage: "clock").font(.caption.weight(.medium))
+        Label("\(recipe.servings) \(recipe.servings == 1 ? "serving" : "servings")", systemImage: "person").font(.caption.weight(.medium))
+        if recipe.diet != .any { Label(recipe.diet.title, systemImage: "leaf").font(.caption.weight(.medium)) }
     }
 
     private func ingredientRow(_ ingredient: RecipeIngredient) -> some View {
@@ -265,15 +278,17 @@ struct RecipeDetailView: View {
         let assumed = !inPantry && model.state.preferences.assumeStaples && RecipeMatcher.staples.contains(ingredient.name)
         return HStack(alignment: .top, spacing: 12) {
             Image(systemName: inPantry || assumed ? "checkmark.circle.fill" : "circle.dashed")
-                .foregroundStyle(inPantry || assumed ? Color.accentColor : .secondary)
+                .foregroundStyle(inPantry || assumed ? MealTheme.accent : .secondary)
                 .padding(.top, 2).accessibilityHidden(true)
             VStack(alignment: .leading, spacing: 4) {
                 Text(ingredient.name.capitalized).font(.body.weight(.medium))
-                Text(ingredient.amount).font(.subheadline).foregroundStyle(.secondary)
-                Text(inPantry ? "In your pantry" : (assumed ? "Assumed pantry staple" : "Add to your shopping list"))
-                    .font(.caption).foregroundStyle(inPantry || assumed ? Color.accentColor : .secondary)
+                Text(ingredient.amount).font(.subheadline).foregroundStyle(MealTheme.secondary)
             }
-        }.padding(.vertical, 4).accessibilityElement(children: .combine)
+            Spacer(minLength: 4)
+            if assumed { MealBadge(title: "Staple") }
+            else if !inPantry { MealBadge(title: "Missing", gold: true) }
+        }.padding(.vertical, 4).accessibilityElement(children: .ignore)
+            .accessibilityLabel("\(ingredient.name), \(ingredient.amount), \(inPantry ? "in pantry" : (assumed ? "assumed pantry staple" : "missing"))")
     }
 
     private var shoppingText: String {

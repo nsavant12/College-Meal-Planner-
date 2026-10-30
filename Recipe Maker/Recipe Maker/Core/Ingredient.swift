@@ -42,12 +42,6 @@ enum Ingredient {
             .map(normalize).filter { !$0.isEmpty && $0.count <= 60 })).sorted()
     }
 
-    static let suggestions = [
-        "tomato", "spinach", "egg", "bread", "cheese", "pasta", "cooked rice",
-        "chickpea", "black bean", "tortilla", "banana", "oats", "yogurt",
-        "potato", "broccoli", "carrot", "bell pepper", "onion", "garlic", "olive oil"
-    ]
-
     // General labels such as "food", "fruit", and prepared dishes must never
     // become pantry ingredients. Unlisted foods can still be entered manually.
     static let recognizable: Set<String> = [
@@ -67,7 +61,7 @@ struct IngredientCandidate: Identifiable, Equatable {
     let name: String
     let confidence: Float
 
-    static func filtered(_ predictions: [(String, Float)], threshold: Float = 0.2) -> [Self] {
+    static func filtered(_ predictions: [(String, Float)], threshold: Float = 0.5, limit: Int = 12) -> [Self] {
         var best: [String: Float] = [:]
         for (label, confidence) in predictions where confidence.isFinite && confidence >= threshold && confidence <= 1 {
             let name = Ingredient.normalize(label)
@@ -76,6 +70,6 @@ struct IngredientCandidate: Identifiable, Equatable {
         }
         return best.map { Self(name: $0.key, confidence: $0.value) }
             .sorted { $0.confidence == $1.confidence ? $0.name < $1.name : $0.confidence > $1.confidence }
-            .prefix(6).map { $0 }
+            .prefix(max(0, limit)).map { $0 }
     }
 }

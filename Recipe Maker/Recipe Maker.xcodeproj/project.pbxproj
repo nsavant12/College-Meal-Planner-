@@ -28,6 +28,14 @@
 		A20000000000000000000009 /* IngredientReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000009 /* IngredientReviewView.swift */; };
 		A2000000000000000000000A /* RecipeViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000A /* RecipeViews.swift */; };
 		A2000000000000000000000B /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000B /* PrivacyInfo.xcprivacy */; };
+		A2000000000000000000000C /* AppInformation.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000C /* AppInformation.swift */; };
+		A2000000000000000000000D /* RecipeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000D /* RecipeRepository.swift */; };
+		A2000000000000000000000E /* recipes.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000E /* recipes.sqlite */; };
+		A2000000000000000000000F /* banana.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A1000000000000000000000F /* banana.jpg */; };
+		A20000000000000000000010 /* banana-LICENSE.txt in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000010 /* banana-LICENSE.txt */; };
+		A20000000000000000000011 /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000011 /* AppTheme.swift */; };
+		A20000000000000000000012 /* RecognitionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000012 /* RecognitionPolicy.swift */; };
+		A20000000000000000000013 /* Recognition in Resources */ = {isa = PBXBuildFile; fileRef = A10000000000000000000013 /* Recognition */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +81,14 @@
 		A10000000000000000000009 /* IngredientReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "IngredientReviewView.swift"; sourceTree = "<group>"; };
 		A1000000000000000000000A /* RecipeViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RecipeViews.swift"; sourceTree = "<group>"; };
 		A1000000000000000000000B /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "PrivacyInfo.xcprivacy"; sourceTree = "<group>"; };
+		A1000000000000000000000C /* AppInformation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInformation.swift; sourceTree = "<group>"; };
+		A1000000000000000000000D /* RecipeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core/RecipeRepository.swift"; sourceTree = "<group>"; };
+		A1000000000000000000000E /* recipes.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Core/Resources/recipes.sqlite"; sourceTree = "<group>"; };
+		A1000000000000000000000F /* banana.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Fixtures/banana.jpg"; sourceTree = "<group>"; };
+		A10000000000000000000010 /* banana-LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Fixtures/banana-LICENSE.txt"; sourceTree = "<group>"; };
+		A10000000000000000000011 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
+		A10000000000000000000012 /* RecognitionPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Core/RecognitionPolicy.swift"; sourceTree = "<group>"; };
+		A10000000000000000000013 /* Recognition */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "Fixtures/Recognition"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +140,7 @@
 			isa = PBXGroup;
 			children = (
 				A10000000000000000000001 /* Ingredient.swift */,
+				A10000000000000000000012 /* RecognitionPolicy.swift */,
 				A10000000000000000000002 /* Recipe.swift */,
 				A10000000000000000000003 /* RecipeCatalog.swift */,
 				A10000000000000000000004 /* PlannerStore.swift */,
@@ -132,6 +149,10 @@
 				A10000000000000000000007 /* PhotoPicker.swift */,
 				A10000000000000000000008 /* MealPlannerView.swift */,
 				A10000000000000000000009 /* IngredientReviewView.swift */,
+				A1000000000000000000000D /* RecipeRepository.swift */,
+				A1000000000000000000000E /* recipes.sqlite */,
+				A1000000000000000000000C /* AppInformation.swift */,
+				A10000000000000000000011 /* AppTheme.swift */,
 				A1000000000000000000000A /* RecipeViews.swift */,
 				A1000000000000000000000B /* PrivacyInfo.xcprivacy */,
 				1B413ECD2C28C32F0080ABAB /* Extensions.swift */,
@@ -149,6 +170,9 @@
 		1B413E6D2C2755D90080ABAB /* Recipe MakerTests */ = {
 			isa = PBXGroup;
 			children = (
+				A1000000000000000000000F /* banana.jpg */,
+				A10000000000000000000013 /* Recognition */,
+				A10000000000000000000010 /* banana-LICENSE.txt */,
 				1B413E6E2C2755D90080ABAB /* Recipe_MakerTests.swift */,
 			);
 			path = "Recipe MakerTests";
@@ -267,6 +291,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2000000000000000000000E /* recipes.sqlite in Resources */,
 				A2000000000000000000000B /* PrivacyInfo.xcprivacy in Resources */,
 				1B413E612C2755D90080ABAB /* Assets.xcassets in Resources */,
 				1B413E642C2755D90080ABAB /* Base in Resources */,
@@ -278,6 +303,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2000000000000000000000F /* banana.jpg in Resources */,
+				A20000000000000000000013 /* Recognition in Resources */,
+				A20000000000000000000010 /* banana-LICENSE.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A20000000000000000000001 /* Ingredient.swift in Sources */,
+				A20000000000000000000012 /* RecognitionPolicy.swift in Sources */,
 				A20000000000000000000002 /* Recipe.swift in Sources */,
 				A20000000000000000000003 /* RecipeCatalog.swift in Sources */,
 				A20000000000000000000004 /* PlannerStore.swift in Sources */,
@@ -304,6 +333,9 @@
 				A20000000000000000000007 /* PhotoPicker.swift in Sources */,
 				A20000000000000000000008 /* MealPlannerView.swift in Sources */,
 				A20000000000000000000009 /* IngredientReviewView.swift in Sources */,
+				A2000000000000000000000D /* RecipeRepository.swift in Sources */,
+				A2000000000000000000000C /* AppInformation.swift in Sources */,
+				A20000000000000000000011 /* AppTheme.swift in Sources */,
 				A2000000000000000000000A /* RecipeViews.swift in Sources */,
 				1B413ECE2C28C32F0080ABAB /* Extensions.swift in Sources */,
 				1B413E5C2C2755D50080ABAB /* ViewController.swift in Sources */,
@@ -503,6 +535,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MEAL_PLANNER_PRIVACY_URL = "";
+				MEAL_PLANNER_SUPPORT_URL = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "builtbyNS.Recipe-Maker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -531,6 +565,8 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
+				MEAL_PLANNER_PRIVACY_URL = "";
+				MEAL_PLANNER_SUPPORT_URL = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "builtbyNS.Recipe-Maker";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

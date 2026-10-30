@@ -20,26 +20,47 @@ struct LibraryPicker: UIViewControllerRepresentable {
     }
     func updateUIViewController(_ uiViewController: PHPickerViewController, context: Context) {}
     func makeCoordinator() -> Coordinator { Coordinator(completion: completion) }
+    static func dismantleUIViewController(_ uiViewController: PHPickerViewController, coordinator: Coordinator) {
+        coordinator.cancelPendingLoad()
+    }
 
     final class Coordinator: NSObject, PHPickerViewControllerDelegate {
         let completion: (Result<UIImage?, Error>) -> Void
+        private var isLoading = false
+        private var isFinished = false
+        private var progress: Progress?
         init(completion: @escaping (Result<UIImage?, Error>) -> Void) { self.completion = completion }
         func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-            guard let provider = results.first?.itemProvider else { completion(.success(nil)); return }
+            guard !isFinished else { return }
+            guard let provider = results.first?.itemProvider else { finish(.success(nil)); return }
+            guard !isLoading else { return }
             guard provider.hasItemConformingToTypeIdentifier(UTType.image.identifier) else {
-                completion(.failure(PhotoError.unreadable))
+                finish(.failure(PhotoError.unreadable))
                 return
             }
+            isLoading = true
             // Decode a thumbnail while the temporary file is valid. Loading a
             // full-resolution 48 MP UIImage first can exhaust a phone's memory.
-            provider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
+            progress = provider.loadFileRepresentation(forTypeIdentifier: UTType.image.identifier) { url, error in
                 let image = url.flatMap { UIImage.recognitionThumbnail(at: $0) }
                 DispatchQueue.main.async {
-                    if let error = error { self.completion(.failure(error)) }
-                    else if let image = image { self.completion(.success(image)) }
-                    else { self.completion(.failure(PhotoError.unreadable)) }
+                    if let error = error { self.finish(.failure(error)) }
+                    else if let image = image { self.finish(.success(image)) }
+                    else { self.finish(.failure(PhotoError.unreadable)) }
                 }
             }
+        }
+
+        func cancelPendingLoad() {
+            isFinished = true
+            progress?.cancel()
+            progress = nil
+        }
+
+        private func finish(_ result: Result<UIImage?, Error>) {
+            guard !isFinished else { return }
+            cancelPendingLoad()
+            completion(result)
         }
     }
 }

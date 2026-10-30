@@ -1,0 +1,8 @@
+Banana-Single.jpg, by Evan-Amos. Original photograph, unmodified.
+Source: https://commons.wikimedia.org/wiki/File:Banana-Single.jpg
+Original: https://upload.wikimedia.org/wikipedia/commons/8/8a/Banana-Single.jpg
+License: Creative Commons Attribution-ShareAlike 3.0 Unported
+https://creativecommons.org/licenses/by-sa/3.0/
+
+This fixture is included only in the test bundle, not in the distributed app.
+The photo's license applies separately from the repository's MIT-licensed code.

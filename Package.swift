@@ -8,9 +8,10 @@ let package = Package(
     platforms: [.macOS(.v14), .iOS(.v17)],
     products: [.library(name: "MealPlannerCore", targets: ["MealPlannerCore"])],
     targets: [
-        .target(name: "MealPlannerCore", path: "Recipe Maker/Recipe Maker/Core"),
+        .target(name: "MealPlannerCore", path: "Recipe Maker/Recipe Maker/Core",
+                resources: [.process("Resources")], linkerSettings: [.linkedLibrary("sqlite3")]),
         .testTarget(name: "MealPlannerCoreTests", dependencies: ["MealPlannerCore"],
-                    path: "Recipe Maker/Recipe MakerTests")
+                    path: "Recipe Maker/Recipe MakerTests", exclude: ["Fixtures"])
     ],
     swiftLanguageModes: [.v5]
 )

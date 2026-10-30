@@ -1,0 +1,64 @@
+[
+  {
+    "file": "../banana.jpg",
+    "expected": [
+      "banana"
+    ],
+    "minimumCorrect": 1,
+    "split": "existing regression"
+  },
+  {
+    "file": "fruit-plate.jpg",
+    "expected": [
+      "apple",
+      "banana",
+      "kiwi",
+      "lemon",
+      "orange"
+    ],
+    "minimumCorrect": 2,
+    "split": "development"
+  },
+  {
+    "file": "mixed-vegetables.jpg",
+    "expected": [
+      "carrot",
+      "cucumber",
+      "tomato"
+    ],
+    "minimumCorrect": 3,
+    "split": "development"
+  },
+  {
+    "file": "vegetable-display.jpg",
+    "expected": [
+      "bell pepper",
+      "broccoli",
+      "cabbage",
+      "carrot",
+      "potato",
+      "tomato"
+    ],
+    "minimumCorrect": 5,
+    "split": "development"
+  },
+  {
+    "file": "fruit-bowl.jpg",
+    "expected": [
+      "apple",
+      "banana",
+      "guava",
+      "orange",
+      "pear",
+      "pomegranate"
+    ],
+    "minimumCorrect": 2,
+    "split": "additional evaluation"
+  },
+  {
+    "file": "hammer.jpg",
+    "expected": [],
+    "minimumCorrect": 0,
+    "split": "negative control"
+  }
+]

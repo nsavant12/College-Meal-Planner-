@@ -18,6 +18,7 @@ struct MealPlannerView: View {
             NavigationStack { RecipeListView(model: model, savedOnly: true) }
                 .tabItem { Label("Saved", systemImage: "heart") }.tag(2)
         }
+        .tint(MealTheme.accent)
         .safeAreaInset(edge: .top, spacing: 0) {
             if let message = model.storageMessage {
                 VStack(alignment: .leading, spacing: 8) {
@@ -64,88 +65,119 @@ struct PantryView: View {
     @State private var showAbout = false
     @FocusState private var inputFocused: Bool
     @State private var recognizer = IngredientRecognizer()
+    @State private var recognitionTask: IngredientRecognitionTask?
+    @State private var scanID: UUID?
+    @State private var scanProgress = 0.0
+    @ScaledMetric(relativeTo: .subheadline) private var suggestionWidth: CGFloat = 140
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         List {
             Section {
-                hero
-                    .listRowBackground(Color.clear)
-                    .listRowInsets(EdgeInsets(top: 8, leading: 0, bottom: 12, trailing: 0))
-            }
-            Section {
-                VStack(alignment: .leading, spacing: 14) {
-                    Label("Start with what you have", systemImage: "camera.viewfinder")
-                        .font(.headline)
-                    Text("Photograph one ingredient at a time, then check the suggestion before adding it.")
-                        .font(.subheadline).foregroundStyle(.secondary)
-                    ViewThatFits(in: .horizontal) {
-                        HStack(spacing: 12) { cameraButton; libraryButton }
-                        VStack(alignment: .leading, spacing: 12) { cameraButton; libraryButton }
+                VStack(alignment: .leading, spacing: 20) {
+                    HStack(alignment: .top, spacing: 16) {
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Scan ingredients")
+                                .font(.system(.title2, design: .serif, weight: .semibold))
+                            Text("Keep each item visible.")
+                                .font(.subheadline).foregroundStyle(MealTheme.cream.opacity(0.85))
+                        }.fixedSize(horizontal: false, vertical: true)
+                        Spacer(minLength: 0)
+                        Image(systemName: "viewfinder")
+                            .font(.system(size: 34, weight: .ultraLight))
+                            .overlay(Image(systemName: "leaf.fill").font(.system(size: 17)))
+                            .accessibilityHidden(true)
+                    }.foregroundStyle(MealTheme.cream)
+                    if dynamicTypeSize > .large {
+                        VStack(spacing: 10) { cameraButton; libraryButton }
+                    } else {
+                        HStack(spacing: 10) { cameraButton; libraryButton }
                     }
                     if isAnalyzing {
-                        ProgressView("Looking for ingredients…")
-                            .font(.subheadline).accessibilityIdentifier("recognitionProgress")
-                    }
-                }.padding(.vertical, 8)
-            }
-            Section {
-                HStack(alignment: .top) {
-                    TextField("e.g. tomatoes, pasta, spinach", text: $input, axis: .vertical)
-                        .lineLimit(1...3).textInputAutocapitalization(.never)
-                        .submitLabel(.done).focused($inputFocused)
-                        .accessibilityLabel("Ingredient names").accessibilityIdentifier("ingredientInput")
-                        .onSubmit(addInput)
-                    Button(action: addInput) { Image(systemName: "plus.circle.fill").font(.title2).frame(minWidth: 44, minHeight: 44) }
-                        .buttonStyle(.borderless).accessibilityLabel("Add ingredients")
-                        .accessibilityIdentifier("addIngredients")
-                        .disabled(input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(Ingredient.suggestions.filter { !model.state.pantry.contains($0) }, id: \.self) { name in
-                            Button { model.add(name) } label: {
-                                Label(name.capitalized, systemImage: "plus").font(.subheadline)
-                                    .padding(.horizontal, 12).frame(minHeight: 44)
-                                    .background(Color.accentColor.opacity(0.1), in: Capsule())
-                            }.buttonStyle(.plain).foregroundStyle(Color.accentColor)
-                                .accessibilityLabel("Add \(name)")
+                        HStack(spacing: 16) {
+                            ProgressView("Scanning…", value: scanProgress).tint(MealTheme.cream)
+                                .foregroundStyle(MealTheme.cream).accessibilityIdentifier("recognitionProgress")
+                            Button("Cancel", action: cancelRecognition)
+                                .foregroundStyle(MealTheme.cream).frame(minWidth: 44, minHeight: 44)
+                                .buttonStyle(.borderless).accessibilityIdentifier("cancelRecognition")
                         }
                     }
-                }.listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 8, trailing: 16))
-            } header: { Text("Or add by hand") }
-            footer: { Text("Separate ingredients with commas. Amounts are checked when you cook.") }
+                }.padding(22)
+                    .background(MealTheme.forest, in: RoundedRectangle(cornerRadius: 26))
+                    .listRowInsets(EdgeInsets()).listRowBackground(Color.clear).listRowSeparator(.hidden)
+            }
+            Section {
+                HStack(alignment: .center, spacing: 8) {
+                    Image(systemName: "plus").foregroundStyle(MealTheme.accent).accessibilityHidden(true)
+                    TextField("Ingredient names", text: $input,
+                              prompt: Text("Add an ingredient").foregroundColor(MealTheme.secondary), axis: .vertical)
+                        .lineLimit(1...3).textInputAutocapitalization(.never).frame(minHeight: 44)
+                        .submitLabel(.done).focused($inputFocused)
+                        .accessibilityLabel("Ingredient names").accessibilityIdentifier("ingredientInput")
+                        .accessibilityHint("Separate ingredient names with commas")
+                        .onSubmit(addInput)
+                    Button(action: addInput) {
+                        Image(systemName: "arrow.up.circle.fill").font(.title2)
+                            .frame(minWidth: 44, minHeight: 44)
+                    }.buttonStyle(.borderless).accessibilityLabel("Add ingredients")
+                        .accessibilityIdentifier("addIngredients")
+                        .disabled(input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                        .opacity(input.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? 0.35 : 1)
+                }.listRowBackground(MealTheme.surface).listRowSeparator(.hidden)
+                if !model.suggestedIngredients.isEmpty {
+                    LazyVGrid(columns: [GridItem(dynamicTypeSize.isAccessibilitySize ? .flexible() : .adaptive(minimum: suggestionWidth), alignment: .leading)], alignment: .leading) {
+                        ForEach(model.suggestedIngredients, id: \.self) { name in
+                            Button { model.add(name) } label: {
+                                Label(name.capitalized, systemImage: "plus")
+                                    .font(.subheadline.weight(.medium))
+                                    .fixedSize(horizontal: false, vertical: true)
+                                    .padding(.horizontal, 12).padding(.vertical, 8).frame(minHeight: 44)
+                                    .background(MealTheme.soft, in: Capsule())
+                            }.buttonStyle(.plain).foregroundStyle(MealTheme.accent)
+                                .accessibilityLabel("Add \(name)").accessibilityIdentifier("suggestion-\(name)")
+                        }
+                    }.padding(.bottom, 6).listRowBackground(MealTheme.surface).listRowSeparator(.hidden)
+                }
+            } footer: {
+                if inputFocused { Text("Separate names with commas.").foregroundStyle(MealTheme.secondary) }
+            }
 
             Section {
                 if model.state.pantry.isEmpty {
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Your next meal starts here.").font(.headline)
-                        Text("Add a few ingredients above. We'll put the recipes closest to your pantry first.")
-                            .font(.subheadline).foregroundStyle(.secondary)
-                    }.padding(.vertical, 12)
+                    MealEmptyState(title: "A fresh start", message: "Add ingredients. Find your next meal.",
+                                   symbol: "basket", identifier: "emptyPantry")
+                        .listRowBackground(Color.clear).listRowSeparator(.hidden)
                 } else {
                     ForEach(model.state.pantry.sorted(), id: \.self) { name in
                         Label(name.capitalized, systemImage: "checkmark.circle.fill")
-                            .foregroundStyle(.primary)
+                            .foregroundStyle(MealTheme.ink).padding(.vertical, 4)
                             .accessibilityIdentifier("pantry-\(name)")
+                            .listRowBackground(MealTheme.surface)
                     }.onDelete { offsets in
                         let sorted = model.state.pantry.sorted()
                         for index in offsets { model.remove(sorted[index]) }
                     }
-                    Button(action: findRecipes) {
-                        HStack {
-                            Text("Find my next meal").fontWeight(.semibold)
-                            Spacer()
-                            Image(systemName: "arrow.right")
-                        }.padding(.vertical, 8)
-                    }.accessibilityIdentifier("findRecipes")
                 }
             } header: {
-                Text("My pantry · \(model.state.pantry.count)")
-            } footer: {
-                if !model.state.pantry.isEmpty { Text("Swipe left to remove an ingredient when it runs out.") }
+                HStack {
+                    Text("In your pantry").font(.system(.title3, design: .serif, weight: .semibold))
+                    Spacer()
+                    Text("\(model.state.pantry.count)").font(.subheadline.monospacedDigit())
+                }.textCase(nil).foregroundStyle(MealTheme.ink)
             }
         }
-        .listStyle(.insetGrouped).scrollDismissesKeyboard(.interactively)
+        .listStyle(.insetGrouped).listSectionSpacing(20).mealSurface()
+        .scrollDismissesKeyboard(.interactively)
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            if !model.state.pantry.isEmpty && !inputFocused {
+                Button(action: findRecipes) {
+                    HStack { Text("Find recipes"); Spacer(); Image(systemName: "arrow.right") }
+                }.buttonStyle(MealActionStyle()).accessibilityIdentifier("findRecipes")
+                    .frame(maxWidth: 680).padding(.horizontal, 20).padding(.vertical, 10)
+                    .frame(maxWidth: .infinity).background(MealTheme.background)
+            }
+        }
         .navigationTitle("Pantry").navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarLeading) {
@@ -173,7 +205,11 @@ struct PantryView: View {
                 model.add(names.joined(separator: ","))
             }
         }
-        .sheet(isPresented: $showAbout) { AboutView() }
+        .sheet(isPresented: $showAbout) { AboutView(model: model) }
+        .onDisappear(perform: cancelRecognition)
+        .onChange(of: scenePhase) { _, phase in
+            if phase == .background { cancelRecognition() }
+        }
         .confirmationDialog("Clear all pantry ingredients?", isPresented: $showClear, titleVisibility: .visible) {
             Button("Clear pantry", role: .destructive) { model.clearPantry() }
         } message: { Text("Your saved recipes will stay in your collection.") }
@@ -188,27 +224,18 @@ struct PantryView: View {
         }
     }
 
-    private var hero: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            Text("LESS WASTE. MORE TASTE.").font(.caption.weight(.bold)).tracking(2).foregroundStyle(Color.accentColor)
-            Text("Good food.\nAlready in your fridge.")
-                .font(.system(.largeTitle, design: .rounded, weight: .bold)).fixedSize(horizontal: false, vertical: true)
-            Text("Make something good with what you've got.")
-                .font(.subheadline).foregroundStyle(.secondary)
-        }.padding(.vertical, 8).accessibilityElement(children: .combine)
-    }
-
     private var cameraButton: some View {
-        Button(action: openCamera) { Label("Take photo", systemImage: "camera.fill").frame(minHeight: 30) }
-            .buttonStyle(.borderedProminent)
+        Button(action: openCamera) { Label("Camera", systemImage: "camera.fill") }
+            .buttonStyle(MealActionStyle(prominent: false))
             .disabled(isAnalyzing || isRequestingCamera).accessibilityIdentifier("takePhoto")
+            .accessibilityLabel("Take photo")
     }
 
     private var libraryButton: some View {
-        Button { inputFocused = false; picker = .library } label: {
-            Label("Choose photo", systemImage: "photo").frame(minHeight: 30)
-        }.buttonStyle(.bordered).disabled(isAnalyzing || isRequestingCamera)
-            .accessibilityIdentifier("choosePhoto")
+        Button { inputFocused = false; picker = .library } label: { Label("Photos", systemImage: "photo") }
+            .buttonStyle(MealActionStyle(prominent: false))
+            .disabled(isAnalyzing || isRequestingCamera).accessibilityIdentifier("choosePhoto")
+            .accessibilityLabel("Choose photo")
     }
 
     private func addInput() {
@@ -250,6 +277,8 @@ struct PantryView: View {
     }
 
     private func photoPicked(_ result: Result<UIImage?, Error>) {
+        pendingPhoto = nil
+        pendingError = nil
         switch result {
         case .success(let image): pendingPhoto = image
         case .failure(let error): pendingError = error
@@ -269,8 +298,16 @@ struct PantryView: View {
             alert = PantryAlert(title: "Couldn't open photo", message: PhotoError.unreadable.localizedDescription)
             return
         }
+        let id = UUID()
+        scanID = id
+        scanProgress = 0
         isAnalyzing = true
-        recognizer.recognize(cgImage, orientation: .up) { result in
+        recognitionTask = recognizer.recognize(cgImage, orientation: .up, progress: { value in
+            if scanID == id { scanProgress = value }
+        }) { result in
+            guard scanID == id else { return }
+            scanID = nil
+            recognitionTask = nil
             isAnalyzing = false
             switch result {
             case .success(let recognition):
@@ -278,35 +315,16 @@ struct PantryView: View {
             case .failure:
                 // Preserve the photo and a manual path even if Vision is unavailable.
                 review = PhotoReview(image: UIImage(cgImage: cgImage), result: RecognitionResult(candidates: [], source: ""),
-                                     message: "Photo recognition isn't available right now. You can still name the ingredient below.")
+                                     message: "Recognition unavailable. Add a name below.")
             }
         }
     }
-}
 
-struct AboutView: View {
-    @Environment(\.dismiss) private var dismiss
-    var body: some View {
-        NavigationStack {
-            List {
-                Section {
-                    Label("Small pantry. Big possibilities.", systemImage: "leaf.fill").font(.headline)
-                    Text("Meal Planner helps you turn everyday ingredients into simple meals, with 20 recipes that work offline.")
-                }
-                Section("Your photos stay yours") {
-                    Text("Recognition happens on this device. Photos are used only to suggest ingredients; the app doesn't upload or save them. No account, tracking, or subscription.")
-                    Text("Your pantry, saved recipes, and filters are stored locally. Device backups may include this data.")
-                }
-                Section("A little help with recognition") {
-                    Text("Use good lighting and photograph one ingredient at a time. Suggestions can be wrong or incomplete, so always review them. You can add any ingredient by hand.")
-                }
-                Section("Before you cook") {
-                    Text("Pantry matching checks ingredient names, not amounts or freshness. Check quantities, food condition, and package labels before cooking. Dietary filters describe the recipes; they don't verify allergens in your products.")
-                    Text("Water is assumed available. Oil, salt, and pepper are counted unless you enable pantry staples in Filters.")
-                }
-                Section { Text("Meal Planner · Version 1.0").foregroundStyle(.secondary) }
-            }.navigationTitle("Made for your pantry").navigationBarTitleDisplayMode(.inline)
-                .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
-        }
+    private func cancelRecognition() {
+        scanID = nil
+        recognitionTask?.cancel()
+        recognitionTask = nil
+        isAnalyzing = false
+        scanProgress = 0
     }
 }

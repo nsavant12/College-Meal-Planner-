@@ -25,5 +25,9 @@
 	</dict>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
+	<key>MealPlannerPrivacyPolicyURL</key>
+	<string>$(MEAL_PLANNER_PRIVACY_URL)</string>
+	<key>MealPlannerSupportURL</key>
+	<string>$(MEAL_PLANNER_SUPPORT_URL)</string>
 </dict>
 </plist>
