@@ -68,8 +68,13 @@ struct IngredientCandidate: Identifiable, Equatable {
             guard Ingredient.recognizable.contains(name) else { continue }
             best[name] = max(best[name] ?? 0, confidence)
         }
-        return best.map { Self(name: $0.key, confidence: $0.value) }
-            .sorted { $0.confidence == $1.confidence ? $0.name < $1.name : $0.confidence > $1.confidence }
-            .prefix(max(0, limit)).map { $0 }
+        var candidates: [IngredientCandidate] = best.map { name, confidence in
+            IngredientCandidate(name: name, confidence: confidence)
+        }
+        candidates.sort { lhs, rhs in
+            if lhs.confidence == rhs.confidence { return lhs.name < rhs.name }
+            return lhs.confidence > rhs.confidence
+        }
+        return Array(candidates.prefix(max(0, limit)))
     }
 }
