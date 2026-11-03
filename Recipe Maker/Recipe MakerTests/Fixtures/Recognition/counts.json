@@ -1,0 +1,6 @@
+[
+  {"file":"../banana.jpg","scene":"banana","split":"existing regression","counts":{"banana":1,"apple":0,"orange":0,"broccoli":0,"carrot":0},"note":"Single visible banana; all five detector classes reviewed."},
+  {"file":"fruit-plate.jpg","scene":"fruit-plate","split":"development","countScope":["apple","orange"],"counts":{"apple":1,"orange":3},"note":"Partial annotation: only unambiguous apple and orange instances reviewed; occluded bananas excluded."},
+  {"file":"fruit-bowl.jpg","scene":"fruit-bowl","split":"additional evaluation","countScope":["apple"],"counts":{"apple":2},"note":"Partial annotation: red apple top and green apple lower right. Other fruit classes excluded."},
+  {"file":"hammer.jpg","scene":"hammer","split":"negative control","counts":{"banana":0,"apple":0,"orange":0,"broccoli":0,"carrot":0},"note":"Non-food negative control."}
+]

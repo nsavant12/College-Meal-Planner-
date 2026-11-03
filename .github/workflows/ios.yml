@@ -17,6 +17,10 @@ jobs:
       - uses: actions/checkout@v4
       - name: Verify recipe database and import pipeline
         run: python3 scripts/test-catalog.py
+      - name: Test vision evaluation metrics
+        run: |
+          python3 scripts/test-recognition-evaluation.py
+          python3 scripts/vision/test_benchmark.py
       - name: Test recipe and persistence logic
         run: bash scripts/test-core.sh
       - name: Verify real-photo recognition on macOS
@@ -27,6 +31,14 @@ jobs:
             "Recipe Maker/Recipe Maker/IngredientRecognizer.swift" \
             scripts/RecognitionSmoke.swift -o "$RUNNER_TEMP/recognition-smoke"
           "$RUNNER_TEMP/recognition-smoke" "Recipe Maker/Recipe MakerTests/Fixtures/Recognition/cases.json"
+      - name: Verify staged recognition without model dependencies
+        run: |
+          xcrun swiftc -parse-as-library -swift-version 5 \
+            "Recipe Maker/Recipe Maker/Core/Ingredient.swift" \
+            "Recipe Maker/Recipe Maker/Core/RecognitionPolicy.swift" \
+            "Recipe Maker/Recipe Maker/IngredientRecognizer.swift" \
+            scripts/RecognitionPipelineTests.swift -o "$RUNNER_TEMP/recognition-pipeline-tests"
+          "$RUNNER_TEMP/recognition-pipeline-tests"
       - name: Select an available iPhone simulator
         id: simulator
         run: |

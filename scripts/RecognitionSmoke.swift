@@ -23,6 +23,16 @@ struct RecognitionSmoke {
         let regions: Int
         let failedRegions: Int
         let milliseconds: Int
+        let initialMilliseconds: Double
+        let detectorStatus: String
+        let scores: [String: Float]
+        let counts: [String: Int]
+        let boxes: [Box]
+    }
+    struct Box: Codable {
+        let name: String
+        let score: Float
+        let xywh: [Double]
     }
 
     static func main() async throws {
@@ -31,7 +41,16 @@ struct RecognitionSmoke {
         }
         let manifest = URL(fileURLWithPath: CommandLine.arguments[1])
         let fixtures = try JSONDecoder().decode([Fixture].self, from: Data(contentsOf: manifest))
-        let recognizer = IngredientRecognizer()
+        var bundle = Bundle.main
+        if CommandLine.arguments.count >= 4 {
+            guard let supplied = Bundle(path: CommandLine.arguments[3]),
+                  (supplied.url(forResource: "IngredientDetector", withExtension: "mlmodelc") != nil ||
+                   supplied.url(forResource: "IngredientClassifier", withExtension: "mlmodelc") != nil) else {
+                throw NSError(domain: "RecognitionSmoke", code: 4, userInfo: [NSLocalizedDescriptionKey: "Model bundle missing compiled classifier or detector"])
+            }
+            bundle = supplied
+        }
+        let recognizer = IngredientRecognizer(bundle: bundle)
         var evaluations: [Evaluation] = []
         var failures: [String] = []
         for fixture in fixtures {
@@ -58,7 +77,13 @@ struct RecognitionSmoke {
                                         baseline: baseline, detected: detected.sorted(),
                                         missed: expected.subtracting(detected).sorted(), unexpected: extra,
                                         regions: result.scannedRegionCount, failedRegions: result.failedRegionCount,
-                                        milliseconds: Int(Date().timeIntervalSince(start) * 1_000))
+                                        milliseconds: Int(Date().timeIntervalSince(start) * 1_000),
+                                        initialMilliseconds: result.initialMilliseconds,
+                                        detectorStatus: result.detectorStatus,
+                                        scores: Dictionary(uniqueKeysWithValues: result.candidates.map { ($0.name, $0.confidence) }),
+                                        counts: Dictionary(uniqueKeysWithValues: result.quantities.map { ($0.name, $0.count) }),
+                                        boxes: result.detections.map { Box(name: $0.name, score: $0.confidence,
+                                            xywh: [Double($0.box.minX), Double($0.box.minY), Double($0.box.width), Double($0.box.height)]) })
             evaluations.append(evaluation)
             print("\(fixture.file): \(correct)/\(expected.count) visible ingredients, \(extra.count) unexpected; \(evaluation.milliseconds) ms, \(evaluation.regions) regions")
             print("  baseline: \(baseline); regional: \(evaluation.detected); missed: \(evaluation.missed)")

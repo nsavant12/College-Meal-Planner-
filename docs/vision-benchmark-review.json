@@ -1,0 +1,1038 @@
+{
+  "scope": "Five COCO ingredient categories; alternate floors are exploratory after original results.",
+  "detectors": {
+    "ssdlite": {
+      "original_threshold": 0.75,
+      "original_target_met": false,
+      "host_latency_ms": {
+        "p50": 69.29866599966772,
+        "p95": 72.96354201389477
+      },
+      "coco_bbox": {
+        "AP": 0.11186664609827225,
+        "AP50": 0.20977222093474007,
+        "AP75": 0.10500630732176143,
+        "AP_small": 0.002597935705949178,
+        "AP_medium": 0.1151613933024522,
+        "AP_large": 0.31065898834821637,
+        "AR1": 0.08674474525869566,
+        "AR10": 0.19993834525025922,
+        "AR100": 0.2672797620023096,
+        "AR_small": 0.018686671912407294,
+        "AR_medium": 0.310931168002437,
+        "AR_large": 0.6088814762315625
+      },
+      "operating_points": [
+        {
+          "calibration_precision_floor": 0.9,
+          "threshold": 0.75,
+          "evaluation": {
+            "images": 4010,
+            "micro": {
+              "tn": 19714,
+              "fn": 245,
+              "tp": 87,
+              "fp": 4,
+              "precision": 0.9560439560439561,
+              "recall": 0.2620481927710843
+            },
+            "macro_recall": 0.2545531498354005,
+            "per_class": {
+              "banana": {
+                "tn": 3925,
+                "fn": 52,
+                "tp": 33,
+                "precision": 1.0,
+                "recall": 0.38823529411764707
+              },
+              "apple": {
+                "tn": 3948,
+                "fn": 50,
+                "tp": 11,
+                "fp": 1,
+                "precision": 0.9166666666666666,
+                "recall": 0.18032786885245902
+              },
+              "orange": {
+                "tn": 3944,
+                "fn": 48,
+                "tp": 16,
+                "fp": 2,
+                "precision": 0.8888888888888888,
+                "recall": 0.25
+              },
+              "broccoli": {
+                "fn": 38,
+                "tn": 3952,
+                "tp": 20,
+                "precision": 1.0,
+                "recall": 0.3448275862068966
+              },
+              "carrot": {
+                "fn": 57,
+                "tn": 3945,
+                "tp": 7,
+                "fp": 1,
+                "precision": 0.875,
+                "recall": 0.109375
+              }
+            },
+            "exact_set_accuracy": 0.9543640897755611,
+            "negative_images": 3762,
+            "negative_false_positive_rate": 0.0,
+            "count_mae": 0.043682292446707606,
+            "positive_count_pairs": 313,
+            "positive_count_mae": 2.7827476038338657,
+            "positive_count_exact": 0.12140575079872204
+          }
+        },
+        {
+          "calibration_precision_floor": 0.85,
+          "threshold": 0.5,
+          "evaluation": {
+            "images": 4010,
+            "micro": {
+              "tn": 19704,
+              "fn": 207,
+              "tp": 125,
+              "fp": 14,
+              "precision": 0.8992805755395683,
+              "recall": 0.37650602409638556
+            },
+            "macro_recall": 0.3728256866624547,
+            "per_class": {
+              "banana": {
+                "tn": 3922,
+                "fn": 46,
+                "tp": 39,
+                "fp": 3,
+                "precision": 0.9285714285714286,
+                "recall": 0.4588235294117647
+              },
+              "apple": {
+                "tn": 3947,
+                "fn": 44,
+                "tp": 17,
+                "fp": 2,
+                "precision": 0.8947368421052632,
+                "recall": 0.2786885245901639
+              },
+              "orange": {
+                "tn": 3940,
+                "fn": 40,
+                "fp": 6,
+                "tp": 24,
+                "precision": 0.8,
+                "recall": 0.375
+              },
+              "broccoli": {
+                "fn": 28,
+                "tn": 3951,
+                "tp": 30,
+                "fp": 1,
+                "precision": 0.967741935483871,
+                "recall": 0.5172413793103449
+              },
+              "carrot": {
+                "fn": 49,
+                "tn": 3944,
+                "tp": 15,
+                "fp": 2,
+                "precision": 0.8823529411764706,
+                "recall": 0.234375
+              }
+            },
+            "exact_set_accuracy": 0.956857855361596,
+            "negative_images": 3762,
+            "negative_false_positive_rate": 0.002126528442317916,
+            "count_mae": 0.04138585192950926,
+            "positive_count_pairs": 313,
+            "positive_count_mae": 2.6006389776357826,
+            "positive_count_exact": 0.14696485623003194
+          }
+        },
+        {
+          "calibration_precision_floor": 0.8,
+          "threshold": 0.45,
+          "evaluation": {
+            "images": 4010,
+            "micro": {
+              "tn": 19700,
+              "fn": 200,
+              "tp": 132,
+              "fp": 18,
+              "precision": 0.88,
+              "recall": 0.39759036144578314
+            },
+            "macro_recall": 0.39454338193728594,
+            "per_class": {
+              "banana": {
+                "tn": 3921,
+                "fn": 45,
+                "tp": 40,
+                "fp": 4,
+                "precision": 0.9090909090909091,
+                "recall": 0.47058823529411764
+              },
+              "apple": {
+                "tn": 3946,
+                "fn": 40,
+                "tp": 21,
+                "fp": 3,
+                "precision": 0.875,
+                "recall": 0.3442622950819672
+              },
+              "orange": {
+                "tn": 3938,
+                "fn": 39,
+                "tp": 25,
+                "fp": 8,
+                "precision": 0.7575757575757576,
+                "recall": 0.390625
+              },
+              "broccoli": {
+                "fn": 28,
+                "tn": 3951,
+                "tp": 30,
+                "fp": 1,
+                "precision": 0.967741935483871,
+                "recall": 0.5172413793103449
+              },
+              "carrot": {
+                "fn": 48,
+                "tn": 3944,
+                "tp": 16,
+                "fp": 2,
+                "precision": 0.8888888888888888,
+                "recall": 0.25
+              }
+            },
+            "exact_set_accuracy": 0.956857855361596,
+            "negative_images": 3762,
+            "negative_false_positive_rate": 0.0023923444976076554,
+            "count_mae": 0.04093654835005741,
+            "positive_count_pairs": 313,
+            "positive_count_mae": 2.559105431309904,
+            "positive_count_exact": 0.15335463258785942
+          }
+        }
+      ]
+    },
+    "rf-nano": {
+      "original_threshold": 0.55,
+      "original_target_met": false,
+      "host_latency_ms": {
+        "p50": 48.42437501065433,
+        "p95": 51.87866699998267
+      },
+      "coco_bbox": {
+        "AP": 0.28383165768172824,
+        "AP50": 0.4338349652094971,
+        "AP75": 0.30466677871800474,
+        "AP_small": 0.1062563160261899,
+        "AP_medium": 0.3502663056135075,
+        "AP_large": 0.5070676895751245,
+        "AR1": 0.1393602963322286,
+        "AR10": 0.4146388198320858,
+        "AR100": 0.541759140775905,
+        "AR_small": 0.2714336348704097,
+        "AR_medium": 0.6211303846598251,
+        "AR_large": 0.8720284317350755
+      },
+      "operating_points": [
+        {
+          "calibration_precision_floor": 0.9,
+          "threshold": 0.55,
+          "evaluation": {
+            "images": 4010,
+            "micro": {
+              "tn": 19706,
+              "tp": 189,
+              "fn": 143,
+              "fp": 12,
+              "precision": 0.9402985074626866,
+              "recall": 0.5692771084337349
+            },
+            "macro_recall": 0.5662777449871979,
+            "per_class": {
+              "banana": {
+                "tn": 3924,
+                "tp": 53,
+                "fn": 32,
+                "fp": 1,
+                "precision": 0.9814814814814815,
+                "recall": 0.6235294117647059
+              },
+              "apple": {
+                "tn": 3945,
+                "fn": 31,
+                "tp": 30,
+                "fp": 4,
+                "precision": 0.8823529411764706,
+                "recall": 0.4918032786885246
+              },
+              "orange": {
+                "tn": 3943,
+                "tp": 37,
+                "fn": 27,
+                "fp": 3,
+                "precision": 0.925,
+                "recall": 0.578125
+              },
+              "broccoli": {
+                "fn": 21,
+                "tn": 3952,
+                "tp": 37,
+                "precision": 1.0,
+                "recall": 0.6379310344827587
+              },
+              "carrot": {
+                "fn": 32,
+                "tn": 3942,
+                "tp": 32,
+                "fp": 4,
+                "precision": 0.8888888888888888,
+                "recall": 0.5
+              }
+            },
+            "exact_set_accuracy": 0.9683291770573567,
+            "negative_images": 3762,
+            "negative_false_positive_rate": 0.002126528442317916,
+            "count_mae": 0.03639358993559982,
+            "positive_count_pairs": 313,
+            "positive_count_mae": 2.268370607028754,
+            "positive_count_exact": 0.24600638977635783
+          }
+        },
+        {
+          "calibration_precision_floor": 0.85,
+          "threshold": 0.45,
+          "evaluation": {
+            "images": 4010,
+            "micro": {
+              "tn": 19702,
+              "tp": 221,
+              "fn": 111,
+              "fp": 16,
+              "precision": 0.9324894514767933,
+              "recall": 0.6656626506024096
+            },
+            "macro_recall": 0.6643216922156088,
+            "per_class": {
+              "banana": {
+                "tn": 3923,
+                "tp": 59,
+                "fn": 26,
+                "fp": 2,
+                "precision": 0.9672131147540983,
+                "recall": 0.6941176470588235
+              },
+              "apple": {
+                "tn": 3945,
+                "fn": 22,
+                "tp": 39,
+                "fp": 4,
+                "precision": 0.9069767441860465,
+                "recall": 0.639344262295082
+              },
+              "orange": {
+                "tn": 3941,
+                "tp": 41,
+                "fn": 23,
+                "fp": 5,
+                "precision": 0.8913043478260869,
+                "recall": 0.640625
+              },
+              "broccoli": {
+                "fn": 17,
+                "tn": 3952,
+                "tp": 41,
+                "precision": 1.0,
+                "recall": 0.7068965517241379
+              },
+              "carrot": {
+                "fn": 23,
+                "tn": 3941,
+                "tp": 41,
+                "fp": 5,
+                "precision": 0.8913043478260869,
+                "recall": 0.640625
+              }
+            },
+            "exact_set_accuracy": 0.97356608478803,
+            "negative_images": 3762,
+            "negative_false_positive_rate": 0.002658160552897395,
+            "count_mae": 0.03394738155858419,
+            "positive_count_pairs": 313,
+            "positive_count_mae": 2.0798722044728435,
+            "positive_count_exact": 0.28753993610223644
+          }
+        },
+        {
+          "calibration_precision_floor": 0.8,
+          "threshold": 0.4,
+          "evaluation": {
+            "images": 4010,
+            "micro": {
+              "tn": 19694,
+              "tp": 238,
+              "fn": 94,
+              "fp": 24,
+              "precision": 0.9083969465648855,
+              "recall": 0.7168674698795181
+            },
+            "macro_recall": 0.7167309962424766,
+            "per_class": {
+              "banana": {
+                "tn": 3921,
+                "tp": 62,
+                "fn": 23,
+                "fp": 4,
+                "precision": 0.9393939393939394,
+                "recall": 0.7294117647058823
+              },
+              "apple": {
+                "tn": 3942,
+                "fn": 20,
+                "fp": 7,
+                "tp": 41,
+                "precision": 0.8541666666666666,
+                "recall": 0.6721311475409836
+              },
+              "orange": {
+                "tn": 3940,
+                "tp": 43,
+                "fn": 21,
+                "fp": 6,
+                "precision": 0.8775510204081632,
+                "recall": 0.671875
+              },
+              "broccoli": {
+                "fn": 13,
+                "tn": 3950,
+                "tp": 45,
+                "fp": 2,
+                "precision": 0.9574468085106383,
+                "recall": 0.7758620689655172
+              },
+              "carrot": {
+                "fn": 17,
+                "tn": 3941,
+                "tp": 47,
+                "fp": 5,
+                "precision": 0.9038461538461539,
+                "recall": 0.734375
+              }
+            },
+            "exact_set_accuracy": 0.9753117206982543,
+            "negative_images": 3762,
+            "negative_false_positive_rate": 0.0034556087187666137,
+            "count_mae": 0.03279916129998502,
+            "positive_count_pairs": 313,
+            "positive_count_mae": 1.9776357827476039,
+            "positive_count_exact": 0.3003194888178914
+          }
+        }
+      ]
+    },
+    "rf-small": {
+      "original_threshold": 0.5,
+      "original_target_met": false,
+      "host_latency_ms": {
+        "p50": 84.22929199878126,
+        "p95": 86.34450001409277
+      },
+      "coco_bbox": {
+        "AP": 0.3235181137259611,
+        "AP50": 0.48331843708877537,
+        "AP75": 0.3455575686857832,
+        "AP_small": 0.14001726319012722,
+        "AP_medium": 0.40112193995963447,
+        "AP_large": 0.5235382901236877,
+        "AR1": 0.15140379026489365,
+        "AR10": 0.45583183992087123,
+        "AR100": 0.5997539220615178,
+        "AR_small": 0.35608058276085935,
+        "AR_medium": 0.6798586411907438,
+        "AR_large": 0.881966134598792
+      },
+      "operating_points": [
+        {
+          "calibration_precision_floor": 0.9,
+          "threshold": 0.5,
+          "evaluation": {
+            "images": 4010,
+            "micro": {
+              "tn": 19701,
+              "tp": 213,
+              "fn": 119,
+              "fp": 17,
+              "precision": 0.9260869565217391,
+              "recall": 0.641566265060241
+            },
+            "macro_recall": 0.6382140749177003,
+            "per_class": {
+              "banana": {
+                "tn": 3922,
+                "tp": 59,
+                "fn": 26,
+                "fp": 3,
+                "precision": 0.9516129032258065,
+                "recall": 0.6941176470588235
+              },
+              "apple": {
+                "tn": 3945,
+                "fn": 25,
+                "tp": 36,
+                "fp": 4,
+                "precision": 0.9,
+                "recall": 0.5901639344262295
+              },
+              "orange": {
+                "tn": 3942,
+                "tp": 42,
+                "fn": 22,
+                "fp": 4,
+                "precision": 0.9130434782608695,
+                "recall": 0.65625
+              },
+              "broccoli": {
+                "fn": 19,
+                "tn": 3952,
+                "tp": 39,
+                "precision": 1.0,
+                "recall": 0.6724137931034483
+              },
+              "carrot": {
+                "fn": 27,
+                "tn": 3940,
+                "tp": 37,
+                "fp": 6,
+                "precision": 0.8604651162790697,
+                "recall": 0.578125
+              }
+            },
+            "exact_set_accuracy": 0.971072319201995,
+            "negative_images": 3762,
+            "negative_false_positive_rate": 0.0034556087187666137,
+            "count_mae": 0.03424691727821876,
+            "positive_count_pairs": 313,
+            "positive_count_mae": 2.1182108626198084,
+            "positive_count_exact": 0.28434504792332266
+          }
+        },
+        {
+          "calibration_precision_floor": 0.85,
+          "threshold": 0.35,
+          "evaluation": {
+            "images": 4010,
+            "micro": {
+              "tn": 19678,
+              "tp": 258,
+              "fn": 74,
+              "fp": 40,
+              "precision": 0.8657718120805369,
+              "recall": 0.7771084337349398
+            },
+            "macro_recall": 0.7753988835500283,
+            "per_class": {
+              "banana": {
+                "tn": 3916,
+                "tp": 68,
+                "fn": 17,
+                "fp": 9,
+                "precision": 0.8831168831168831,
+                "recall": 0.8
+              },
+              "apple": {
+                "tn": 3942,
+                "fn": 19,
+                "tp": 42,
+                "fp": 7,
+                "precision": 0.8571428571428571,
+                "recall": 0.6885245901639344
+              },
+              "orange": {
+                "tn": 3935,
+                "tp": 50,
+                "fp": 11,
+                "fn": 14,
+                "precision": 0.819672131147541,
+                "recall": 0.78125
+              },
+              "broccoli": {
+                "fn": 11,
+                "tn": 3948,
+                "tp": 47,
+                "fp": 4,
+                "precision": 0.9215686274509803,
+                "recall": 0.8103448275862069
+              },
+              "carrot": {
+                "fn": 13,
+                "tn": 3937,
+                "tp": 51,
+                "fp": 9,
+                "precision": 0.85,
+                "recall": 0.796875
+              }
+            },
+            "exact_set_accuracy": 0.9758104738154614,
+            "negative_images": 3762,
+            "negative_false_positive_rate": 0.005847953216374269,
+            "count_mae": 0.033198542259497775,
+            "positive_count_pairs": 313,
+            "positive_count_mae": 1.926517571884984,
+            "positive_count_exact": 0.36421725239616615
+          }
+        },
+        {
+          "calibration_precision_floor": 0.8,
+          "threshold": 0.25,
+          "evaluation": {
+            "images": 4010,
+            "micro": {
+              "tn": 19643,
+              "tp": 284,
+              "fn": 48,
+              "fp": 75,
+              "precision": 0.7910863509749304,
+              "recall": 0.8554216867469879
+            },
+            "macro_recall": 0.8534597063811391,
+            "per_class": {
+              "banana": {
+                "tn": 3910,
+                "tp": 75,
+                "fn": 10,
+                "fp": 15,
+                "precision": 0.8333333333333334,
+                "recall": 0.8823529411764706
+              },
+              "apple": {
+                "tn": 3933,
+                "fn": 13,
+                "tp": 48,
+                "fp": 16,
+                "precision": 0.75,
+                "recall": 0.7868852459016393
+              },
+              "orange": {
+                "tn": 3929,
+                "tp": 55,
+                "fp": 17,
+                "fn": 9,
+                "precision": 0.7638888888888888,
+                "recall": 0.859375
+              },
+              "broccoli": {
+                "fn": 7,
+                "tn": 3946,
+                "tp": 51,
+                "fp": 6,
+                "precision": 0.8947368421052632,
+                "recall": 0.8793103448275862
+              },
+              "carrot": {
+                "fn": 9,
+                "tn": 3925,
+                "tp": 55,
+                "fp": 21,
+                "precision": 0.7236842105263158,
+                "recall": 0.859375
+              }
+            },
+            "exact_set_accuracy": 0.9745635910224439,
+            "negative_images": 3762,
+            "negative_false_positive_rate": 0.010898458266879319,
+            "count_mae": 0.05147022115720633,
+            "positive_count_pairs": 313,
+            "positive_count_mae": 2.8817891373801916,
+            "positive_count_exact": 0.28753993610223644
+          }
+        }
+      ]
+    }
+  },
+  "source_hashes": {
+    "vision-data/coco/annotations/instances_val2017.json": "e8c7f7908f1d7278341fae127d0da654f102f11bd7b21d8aeefa635b8c810b6f",
+    "vision-runs/coco-ssdlite/summary.json": "329732f61b0a4da4630f786f377175124d317ebdc25d85236aab3ab74c5cda24",
+    "vision-runs/coco-rf-nano/summary.json": "57a862967c856e55a37e1869a8c036d54fd11ba194eaf0237df29a812c1c9ea1",
+    "vision-runs/coco-rf-small/summary.json": "ccb97c5a6dfb8a13a276b591ef2ea3fc35424bd2940208e6804525c7eaf258d1",
+    "vision-runs/grocery-efficientnet/test-summary.json": "a8ebc8f85886cb75a834b70b693ec4e1cf0b190f36b8ab472e87e4fc0d36f63a",
+    "vision-runs/grocery-efficientnet/native-val-summary.json": "e6ec6e0a5e601b62d9956fa803cec8ea2cd9076f249fadbf4145bd5ec71e2858",
+    "vision-runs/grocery-efficientnet/native-app-regression.json": "d11f9b4ec722a4df381dedd12e7892368929878760bb46765fd7d884fb1211da"
+  },
+  "classifier": {
+    "images": 2485,
+    "top1_micro_recall": 0.9633802816901409,
+    "macro_recall": 0.9435102070342827,
+    "top3_recall": 0.9935613682092556,
+    "per_class_recall": {
+      "apple": 0.9963768115942029,
+      "avocado": 0.95,
+      "banana": 0.9772727272727273,
+      "kiwi": 0.9777777777777777,
+      "lemon": 0.8536585365853658,
+      "lime": 0.8333333333333334,
+      "mango": 0.6129032258064516,
+      "melon": 0.9803921568627451,
+      "nectarine": 0.8857142857142857,
+      "orange": 0.8928571428571429,
+      "papaya": 1.0,
+      "passion fruit": 0.8518518518518519,
+      "peach": 1.0,
+      "pear": 0.9814814814814815,
+      "pineapple": 1.0,
+      "plum": 0.8636363636363636,
+      "pomegranate": 0.96,
+      "red grapefruit": 0.9411764705882353,
+      "satsumas": 0.6617647058823529,
+      "juice": 1.0,
+      "milk": 1.0,
+      "oatghurt": 1.0,
+      "oat milk": 1.0,
+      "sour cream": 0.975609756097561,
+      "sour milk": 1.0,
+      "soyghurt": 1.0,
+      "soy milk": 1.0,
+      "yoghurt": 1.0,
+      "asparagus": 1.0,
+      "aubergine": 1.0,
+      "cabbage": 1.0,
+      "carrots": 1.0,
+      "cucumber": 0.7037037037037037,
+      "garlic": 1.0,
+      "ginger": 0.7333333333333333,
+      "leek": 0.9523809523809523,
+      "mushroom": 1.0,
+      "onion": 1.0,
+      "pepper": 1.0,
+      "potato": 0.9857142857142858,
+      "red beet": 1.0,
+      "tomato": 1.0,
+      "zucchini": 1.0
+    },
+    "per_class_support": {
+      "apple": 276,
+      "avocado": 40,
+      "banana": 44,
+      "kiwi": 45,
+      "lemon": 41,
+      "lime": 30,
+      "mango": 31,
+      "melon": 153,
+      "nectarine": 35,
+      "orange": 56,
+      "papaya": 21,
+      "passion fruit": 27,
+      "peach": 36,
+      "pear": 108,
+      "pineapple": 25,
+      "plum": 22,
+      "pomegranate": 25,
+      "red grapefruit": 34,
+      "satsumas": 68,
+      "juice": 219,
+      "milk": 164,
+      "oatghurt": 30,
+      "oat milk": 31,
+      "sour cream": 41,
+      "sour milk": 19,
+      "soyghurt": 47,
+      "soy milk": 58,
+      "yoghurt": 172,
+      "asparagus": 14,
+      "aubergine": 22,
+      "cabbage": 19,
+      "carrots": 42,
+      "cucumber": 27,
+      "garlic": 25,
+      "ginger": 15,
+      "leek": 21,
+      "mushroom": 39,
+      "onion": 37,
+      "pepper": 110,
+      "potato": 70,
+      "red beet": 17,
+      "tomato": 100,
+      "zucchini": 29
+    },
+    "image_wilson_95": [
+      0.9552511819724034,
+      0.9700788992991407
+    ],
+    "target_met": true,
+    "limitations": [
+      "Single foreground class labels: not exhaustive multi-ingredient or counting evaluation.",
+      "Official split and exact-byte duplicate audit; near duplicates and pretraining overlap not ruled out.",
+      "Model is not yet exported or integrated; app thresholds and alias filtering require separate end-to-end validation."
+    ],
+    "weakest_classes": [
+      [
+        "mango",
+        0.6129032258064516
+      ],
+      [
+        "satsumas",
+        0.6617647058823529
+      ],
+      [
+        "cucumber",
+        0.7037037037037037
+      ],
+      [
+        "ginger",
+        0.7333333333333333
+      ],
+      [
+        "lime",
+        0.8333333333333334
+      ],
+      [
+        "passion fruit",
+        0.8518518518518519
+      ],
+      [
+        "lemon",
+        0.8536585365853658
+      ],
+      [
+        "plum",
+        0.8636363636363636
+      ]
+    ]
+  },
+  "native_validation": {
+    "appSuggestionRecall": 0.5912162162162162,
+    "images": 296,
+    "supportedImages": 184,
+    "supportedSuggestionRecall": 0.9510869565217391,
+    "top1Recall": 0.9662162162162162,
+    "unsupportedExpectedLabels": [
+      "asparagus",
+      "ginger",
+      "juice",
+      "leek",
+      "melon",
+      "oat milk",
+      "oatghurt",
+      "passion fruit",
+      "pomegranate",
+      "red beet",
+      "red grapefruit",
+      "satsumas",
+      "sour cream",
+      "soyghurt"
+    ]
+  },
+  "native_regression": [
+    {
+      "baseline": [
+        "banana"
+      ],
+      "boxes": [],
+      "counts": {},
+      "detected": [
+        "banana"
+      ],
+      "detectorStatus": "unavailable",
+      "expected": [
+        "banana"
+      ],
+      "failedRegions": 0,
+      "file": "../banana.jpg",
+      "initialMilliseconds": 1567.0664583449252,
+      "milliseconds": 1753,
+      "missed": [],
+      "regions": 10,
+      "scores": {
+        "banana": 0.9584961
+      },
+      "split": "existing regression",
+      "unexpected": []
+    },
+    {
+      "baseline": [
+        "orange"
+      ],
+      "boxes": [],
+      "counts": {},
+      "detected": [
+        "avocado",
+        "banana",
+        "orange"
+      ],
+      "detectorStatus": "unavailable",
+      "expected": [
+        "apple",
+        "banana",
+        "kiwi",
+        "lemon",
+        "orange"
+      ],
+      "failedRegions": 0,
+      "file": "fruit-plate.jpg",
+      "initialMilliseconds": 15.185666678007692,
+      "milliseconds": 171,
+      "missed": [
+        "apple",
+        "kiwi",
+        "lemon"
+      ],
+      "regions": 10,
+      "scores": {
+        "avocado": 0.6513672,
+        "banana": 0.6166992,
+        "orange": 0.72216797
+      },
+      "split": "development",
+      "unexpected": [
+        "avocado"
+      ]
+    },
+    {
+      "baseline": [
+        "bell pepper",
+        "carrot",
+        "cucumber",
+        "tomato",
+        "zucchini"
+      ],
+      "boxes": [],
+      "counts": {},
+      "detected": [
+        "carrot",
+        "cucumber",
+        "tomato"
+      ],
+      "detectorStatus": "unavailable",
+      "expected": [
+        "carrot",
+        "cucumber",
+        "tomato"
+      ],
+      "failedRegions": 0,
+      "file": "mixed-vegetables.jpg",
+      "initialMilliseconds": 7.0295833284035325,
+      "milliseconds": 154,
+      "missed": [],
+      "regions": 11,
+      "scores": {
+        "carrot": 0.79589844,
+        "cucumber": 0.8022461,
+        "tomato": 0.7192383
+      },
+      "split": "development",
+      "unexpected": []
+    },
+    {
+      "baseline": [
+        "bell pepper",
+        "broccoli",
+        "carrot",
+        "cauliflower",
+        "potato",
+        "tomato"
+      ],
+      "boxes": [],
+      "counts": {},
+      "detected": [
+        "broccoli",
+        "carrot",
+        "potato",
+        "tomato"
+      ],
+      "detectorStatus": "unavailable",
+      "expected": [
+        "bell pepper",
+        "broccoli",
+        "cabbage",
+        "carrot",
+        "potato",
+        "tomato"
+      ],
+      "failedRegions": 0,
+      "file": "vegetable-display.jpg",
+      "initialMilliseconds": 6.546916672959924,
+      "milliseconds": 135,
+      "missed": [
+        "bell pepper",
+        "cabbage"
+      ],
+      "regions": 13,
+      "scores": {
+        "broccoli": 0.86083984,
+        "carrot": 0.82128906,
+        "potato": 0.6958008,
+        "tomato": 0.9194336
+      },
+      "split": "development",
+      "unexpected": []
+    },
+    {
+      "baseline": [
+        "apple",
+        "mango",
+        "pear"
+      ],
+      "boxes": [],
+      "counts": {},
+      "detected": [
+        "apple",
+        "pear"
+      ],
+      "detectorStatus": "unavailable",
+      "expected": [
+        "apple",
+        "banana",
+        "guava",
+        "orange",
+        "pear",
+        "pomegranate"
+      ],
+      "failedRegions": 0,
+      "file": "fruit-bowl.jpg",
+      "initialMilliseconds": 7.147708325646818,
+      "milliseconds": 128,
+      "missed": [
+        "banana",
+        "guava",
+        "orange",
+        "pomegranate"
+      ],
+      "regions": 10,
+      "scores": {
+        "apple": 0.9560547,
+        "pear": 0.9760742
+      },
+      "split": "additional evaluation",
+      "unexpected": []
+    },
+    {
+      "baseline": [
+        "carrot"
+      ],
+      "boxes": [],
+      "counts": {},
+      "detected": [
+        "carrot"
+      ],
+      "detectorStatus": "unavailable",
+      "expected": [],
+      "failedRegions": 0,
+      "file": "hammer.jpg",
+      "initialMilliseconds": 34.5136666437611,
+      "milliseconds": 255,
+      "missed": [],
+      "regions": 10,
+      "scores": {
+        "carrot": 0.6665039
+      },
+      "split": "negative control",
+      "unexpected": [
+        "carrot"
+      ]
+    }
+  ]
+}

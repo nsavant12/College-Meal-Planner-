@@ -9,3 +9,7 @@ xcuserdata/
 *.dSYM/
 __pycache__/
 *.xcarchive/
+.vision-env/
+vision-data/
+vision-runs/
+*.pth

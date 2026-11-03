@@ -552,3 +552,29 @@ private final class TestRecognitionSession: IngredientRecognitionSession {
     }
 }
 #endif
+
+@Suite struct DetectionPolicyTests {
+    func item(_ name: String = "apple", _ score: Float = 0.9, _ x: Double = 0.1) -> IngredientDetection {
+        .init(name: name, confidence: score, box: CGRect(x: x, y: 0.1, width: 0.2, height: 0.2))
+    }
+    @Test func suppressesDuplicatesButPreservesSeparateItems() {
+        let result = DetectionPolicy.instances([item(), item("apples", 0.8, 0.11), item("apple", 0.7, 0.6)])
+        #expect(result.count == 2)
+        #expect(DetectionPolicy.quantities(result).first?.count == 2)
+    }
+    @Test func competingIdentitiesAreNotTwoItems() {
+        #expect(DetectionPolicy.instances([item(), item("orange", 0.8)]).count == 1)
+    }
+    @Test func rejectsInvalidGeometryConfidenceAndUnknownLabels() {
+        let bad = IngredientDetection(name: "apple", confidence: 0.9, box: CGRect(x: Double.nan, y: 0, width: 1, height: 1))
+        #expect(DetectionPolicy.instances([bad, item("food"), item("apple", .nan), item("apple", 1.1), item("apple", 0.2), item("apple", 0.9, 2)]).isEmpty)
+    }
+    @Test func quantitiesNeverInferMassOrCountUncountableFoods() {
+        #expect(DetectionPolicy.quantities([item("milk")]).isEmpty)
+        #expect(DetectionPolicy.quantities([]).isEmpty)
+    }
+    @Test func overlapMatchesKnownGeometry() {
+        #expect(DetectionPolicy.iou(item().box, item().box) == 1)
+        #expect(DetectionPolicy.iou(item().box, item("apple", 0.9, 0.6).box) == 0)
+    }
+}

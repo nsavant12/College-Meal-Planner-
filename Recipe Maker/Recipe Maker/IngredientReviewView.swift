@@ -51,7 +51,12 @@ struct IngredientReviewView: View {
                                 else { selected.insert(candidate.name) }
                             } label: {
                                 HStack(spacing: 12) {
-                                    Text(candidate.name.capitalized).foregroundStyle(MealTheme.ink)
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(candidate.name.capitalized).foregroundStyle(MealTheme.ink)
+                                        if let quantity = review.result.quantities.first(where: { $0.name == candidate.name }) {
+                                            Text(quantity.summary).font(.caption).foregroundStyle(MealTheme.secondary)
+                                        }
+                                    }
                                     Spacer()
                                     Image(systemName: selected.contains(candidate.name) ? "checkmark.circle.fill" : "circle")
                                         .foregroundStyle(MealTheme.accent).font(.title2)
@@ -71,6 +76,10 @@ struct IngredientReviewView: View {
                         .listRowBackground(MealTheme.surface)
                     if hasLongName { Text("60 characters per name, max.").font(.caption).foregroundStyle(.red) }
                 } footer: { Text("Separate names with commas.") }
+                if !review.result.quantities.isEmpty {
+                    Text("Counts estimate visible items only. Hidden items, weight and volume are unknown. Pantry saves ingredient names, not these estimates.")
+                        .font(.caption).foregroundStyle(MealTheme.secondary)
+                }
                 Label("Photos stay on your device", systemImage: "lock")
                     .font(.caption).foregroundStyle(MealTheme.secondary).listRowBackground(Color.clear)
             }.listStyle(.insetGrouped).mealSurface()

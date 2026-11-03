@@ -68,6 +68,7 @@ struct PantryView: View {
     @State private var recognitionTask: IngredientRecognitionTask?
     @State private var scanID: UUID?
     @State private var scanProgress = 0.0
+    @State private var initialNames: [String] = []
     @ScaledMetric(relativeTo: .subheadline) private var suggestionWidth: CGFloat = 140
     @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     @Environment(\.scenePhase) private var scenePhase
@@ -96,7 +97,7 @@ struct PantryView: View {
                     }
                     if isAnalyzing {
                         HStack(spacing: 16) {
-                            ProgressView("Scanning…", value: scanProgress).tint(MealTheme.cream)
+                            ProgressView(initialNames.isEmpty ? "Scanning…" : "Found \(initialNames.joined(separator: ", ")). Checking details…", value: scanProgress).tint(MealTheme.cream)
                                 .foregroundStyle(MealTheme.cream).accessibilityIdentifier("recognitionProgress")
                             Button("Cancel", action: cancelRecognition)
                                 .foregroundStyle(MealTheme.cream).frame(minWidth: 44, minHeight: 44)
@@ -301,9 +302,12 @@ struct PantryView: View {
         let id = UUID()
         scanID = id
         scanProgress = 0
+        initialNames = []
         isAnalyzing = true
         recognitionTask = recognizer.recognize(cgImage, orientation: .up, progress: { value in
             if scanID == id { scanProgress = value }
+        }, preliminary: { result in
+            if scanID == id { initialNames = result.candidates.map(\.name) }
         }) { result in
             guard scanID == id else { return }
             scanID = nil
